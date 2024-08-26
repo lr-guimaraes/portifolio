@@ -125,7 +125,7 @@ main section:nth-child(2) {
 }
 
 main section:nth-child(3) {
-  background: url('\images\imagem.jpg');
+  background: url('.\images\imagem.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: 100%;
