@@ -1,0 +1,404 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --main-font: "Montserrat", sans-serif;
+  --main-color: #b61dfd;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Zen Dots', cursive; /* Fonte padrão para o corpo */
+    background: #000000;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    max-width: 1450px;
+    margin-inline: auto;
+    height: 70px;
+    padding: 5px 30px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    transition: all 0.2s ease 0s;
+    border-radius: 0px 0px 20px 20px;
+}
+
+header .logo {
+    width: 5vw;
+    color: #fff;
+    font-weight: 900;
+    font-size: 2.35rem;
+    font-family: 'Zen Dots', cursive; /* Garantir que a fonte é aplicada aqui também */
+}
+
+header nav {
+    width: max-content;
+    font-size: 14px;
+    font-weight: 300;
+    display: flex;
+    list-style: none;
+    gap: 45px;
+    opacity: 0.9;
+    font-family: 'Zen Dots', cursive; /* Garantir que a fonte é aplicada aqui também */
+}
+
+header nav li a {
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 15px;
+    transition: all 0.3s ease 0s;
+    font-family: 'Zen Dots', cursive; /* Garantir que a fonte é aplicada aqui também */
+}
+
+header nav li a.active {
+    background: #b61dfd6f;
+    border: 1px solid #ffffff35;
+    backdrop-filter: blur(55px);
+    color: #ffffff;
+    border-radius: 20px;
+    font-family: 'Zen Dots', cursive; /* Garantir que a fonte é aplicada aqui também */
+}
+.headerNavs ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.headerNavs ul li a {
+    text-decoration: none;
+    color: white;
+    margin: 0 1vw;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+}
+main {
+  width: 100%;
+  min-height: 100%;
+  position: relative;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+main section {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  position: relative;
+  text-transform: uppercase;
+  box-shadow: 0px 0px 10px #00000024;
+}
+
+main section:nth-child(1) {
+  background: url(https://free4kwallpapers.com/uploads/originals/2023/02/26/galaxy-wallpaper.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+main section:nth-child(2) {
+  background: url(https://images8.alphacoders.com/132/thumb-1920-1320554.png);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+main section:nth-child(3) {
+  background: url('\images\imagem.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+main section::after {
+  content: "";
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+main section .content {
+  z-index: 3;
+  color: #fff;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 60px;
+  row-gap: 15px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+main section .content .image-prev {
+  width: max-content;
+  height: max-content;
+}
+
+main section .content .image-prev img {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0px 0px 40px #0000008e;
+}
+
+main section .content .info {
+  width: 100%;
+  max-width: 600px;
+}
+
+main section .content .info .title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  width: 100%;
+  max-width: 600px;
+}
+
+main section .content .info .desc {
+  width: 100%;
+  max-width: 600px;
+  font-size: 16px;
+  font-weight: 200;
+  text-transform: capitalize;
+  margin-top: 10px;
+}
+
+main section .content .info .tips {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: max-content;
+  gap: 25px;
+}
+
+main section .content .info .tips .stars {
+  display: flex;
+  width: max-content;
+  gap: 5px;
+  font-size: 15px;
+}
+main section .content .info .tips .stars p {
+  opacity: 0.8;
+}
+
+main section .content .info .tips .stars i {
+  color: #ffa600;
+}
+
+main section .content .info .tips .year {
+  padding: 3px 15px;
+  border-radius: 20px;
+  background-color: #b61dfd6f;
+  color: #db8dff;
+}
+
+main section .content .info .buttons {
+  display: flex;
+  margin-top: 25px;
+  align-items: center;
+  gap: 20px;
+  width: max-content;
+}
+
+.playstore-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000;
+  border-radius: 9999px;
+  background-color: rgba(0, 0, 0, 1);
+  padding: 0.625rem 1.5rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
+  outline: 0;
+  backdrop-filter: blur(150px);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.playstore-button:hover {
+  background-color: transparent;
+  border: 2px solid transparent;
+  color: rgb(255, 255, 255);
+}
+
+.icon {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.texts {
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+.text-1 {
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.text-2 {
+  font-weight: 600;
+}
+
+.save_btn {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #b61dfd6f;
+  backdrop-filter: blur(1px);
+  border-radius: 50%;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13);
+  border: none;
+}
+
+.heart {
+  width: 18px;
+}
+
+.heart path {
+  fill: white;
+}
+
+.save_btn:hover {
+  background-color: rgb(0, 0, 0);
+}
+
+.save_btn:hover .heart {
+  animation: heartRing 0.9s both;
+}
+
+/* heart ringing animation keyframes*/
+@keyframes heartRing {
+  0%,
+  100% {
+    transform-origin: top;
+  }
+
+  15% {
+    transform: rotateZ(10deg);
+  }
+
+  30% {
+    transform: rotateZ(-10deg);
+  }
+
+  45% {
+    transform: rotateZ(5deg);
+  }
+
+  60% {
+    transform: rotateZ(-5deg);
+  }
+
+  75% {
+    transform: rotateZ(2deg);
+  }
+}
+
+.save_btn:active {
+  transform: scale(0.8);
+}
+
+@media screen and (max-width: 1500px) {
+  main section:nth-child(1) {
+    background-size: cover;
+  }
+
+  main section:nth-child(2) {
+    background-size: cover;
+  }
+
+  main section:nth-child(3) {
+    background-size: cover;
+  }
+}
+@media screen and (max-width: 1015px) {
+  main section img {
+    transform: scale(0.8);
+  }
+  main section,
+  main section::after {
+    height: 130vh;
+  }
+  main section .content {
+    margin-top: 100px;
+    text-align: center;
+  }
+  main section .content .tips,
+  main section .content .info .buttons {
+    margin-inline: auto;
+  }
+}
+.row2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.row2 h2 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.row2 p {
+    color: #fff;
+    font-size: 16px;
+}
+
+.contact-info {
+    font-size: 18px;
+    color: #b61dfd;
+    margin-top: 10px;
+}
+
+.contact-info a {
+    color: #b61dfd;
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+.contact-info i {
+    margin-right: 5px;
+    color: #ffffff;
+}

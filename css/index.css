@@ -1,0 +1,599 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Zen Dots', cursive;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100vw;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.logo {
+    width: 5vw;
+}
+
+.headerNavs ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.headerNavs ul li a {
+    text-decoration: none;
+    color: white;
+    margin: 0 1vw;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+}
+
+.videowrapper video {
+    width: 100%;
+    height: auto;
+}
+
+.row1 section p:first-child, .row3 {
+    font-size: 4vw;
+    padding: 10vh;
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+}
+
+.row1 section p:last-child {
+    font-size: 1.5vw;
+    letter-spacing: 0.2vw;
+    margin: 5vh;
+    text-align: center;
+}
+
+.row2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.row2 section {
+    position: absolute;
+    color: #f5f5f5;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5vw;
+}
+
+.row2 section h2 {
+    font-size: 4vw;
+    letter-spacing: 0.5vw;
+    font-family: 'Monoton', cursive;
+    text-transform: capitalize;
+}
+
+.row2 section p {
+    font-size: 1.5vw;
+    letter-spacing: 0.2vw;
+}
+
+.row4 {
+    display: flex;
+    justify-content: space-between; /* Distribuição dos botões */
+    flex-wrap: wrap; /* Permite que os botões se movam para a linha seguinte se não couberem na linha atual */
+    gap: 10px; /* Espaço entre os botões */
+    padding: 10px; /* Padding ao redor da seção */
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(6, minmax(100px, 1fr));
+}
+
+.row4 a {
+    display: block;
+    width: 20vw; /* Ajuste a largura dos botões conforme necessário */
+    height: 20vw; /* Ajuste a altura para manter a proporção desejada */
+    max-width: 200px; /* Define uma largura máxima */
+    max-height: 200px; /* Define uma altura máxima */
+    overflow: hidden;
+    border-radius: 10px; /* Borda arredondada para o botão */
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+
+    transition: transform .3s;  
+}
+
+.row4 a:hover {
+    transition: transform .3s;
+    -ms-transform: scale(1.4);
+    -webkit-transform: scale(1.4);  
+    transform: scale(1.4);
+  }
+
+.row4 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Faz com que a imagem cubra o botão mantendo a proporção */
+    border-radius: 2px;
+}
+
+
+.socialIcons {
+    text-align: center;
+    margin: 4vh 0;
+}
+
+.socialIcons a {
+    color: goldenrod;
+    text-decoration: none;
+    background-color: rgba(245, 245, 245, 0.4);
+    border-radius: 50%;
+    font-size: 3vw;
+    padding: 1vw;
+    margin: 1vw;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.socialIcons a:hover {
+    background-color: goldenrod;
+    color: white;
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    background-color: #000;
+    color: #fff;
+    padding: 1.5vw;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+footer h2 {
+    font-size: 1.5vw;
+    margin-bottom: 1vw;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer ul li {
+    margin-bottom: 0.5vw;
+}
+
+footer ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2vw;
+}
+
+.lastStrip {
+    display: flex;
+    justify-content: space-between;
+    padding: 1vw;
+    background-color: #000;
+    color: #fff;
+}
+
+.footerlogo img {
+    width: 50px;
+    height: auto;
+}
+
+.copyright {
+    font-size: 1vw;
+}
+
+.row1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 5vw;
+}
+
+.left-content {
+    flex: 1;
+    text-align: left;
+    font-size: 4vw;
+    font-family: 'Dancing Script', cursive;
+    padding-right: 2vw;
+}
+
+.right-content {
+    flex: 1;
+    padding-left: 2vw;
+}
+
+.right-content h2 {
+    font-size: 2.5vw;
+    font-family: 'Monoton', cursive;
+    text-transform: capitalize;
+    margin-bottom: 2vw;
+}
+
+.skill {
+    margin-bottom: 1.5vw;
+}
+
+.skill p {
+    font-size: 1.5vw;
+    margin: 0;
+    font-family: 'Zen Dots', cursive;
+}
+
+.progress {
+    background-color: #ddd;
+    border-radius: 25px;
+    overflow: hidden;
+    height: 1.5vw;
+}
+
+.progress-bar {
+    background-color: goldenrod;
+    text-align: center;
+    color: white;
+    height: 100%;
+    border-radius: 25px;
+    line-height: 1.5vw;
+}
+
+.row1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 5vw;
+}
+
+.left-content {
+    flex: 1;
+    text-align: left;
+    font-size: 4vw;
+    font-family: 'Dancing Script', cursive;
+    padding-right: 2vw;
+}
+
+.right-content {
+    flex: 1;
+    padding-left: 2vw;
+}
+
+.right-content h2 {
+    font-size: 2.5vw;
+    font-family: 'Monoton', cursive;
+    text-transform: capitalize;
+    margin-bottom: 2vw;
+}
+
+.skill {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1vw;
+}
+
+.skill span {
+    font-size: 1.2vw;
+    margin-right: 1vw;
+    width: 15%;
+    font-family: 'Zen Dots', cursive;
+}
+
+
+
+.progress-bar {
+    background-color: goldenrod;
+    height: 100%;
+    border-radius: 25px;
+}
+.row1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 5vw;
+}
+
+.left-content {
+    flex: 1;
+    text-align: left;
+    font-size: 4vw;
+    font-family: 'Dancing Script', cursive;
+    padding-right: 2vw;
+}
+
+.right-content {
+    flex: 1;
+    padding-left: 2vw;
+}
+
+.right-content h2 {
+    font-size: 2.5vw;
+    font-family: 'Monoton', cursive;
+    text-transform: capitalize;
+    margin-bottom: 2vw;
+}
+
+.skills-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+}
+
+.skill {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1vw;
+}
+
+.skill span {
+    font-size: 1.2vw;
+    margin-right: 1vw;
+    width: 15%;
+    font-family: 'Zen Dots', cursive;
+}
+
+.progress {
+    background-color: #ddd;
+    border-radius: 25px;
+    overflow: hidden;
+    height: 1.5vw;
+    width: 85%;
+}
+
+.progress-bar {
+    background-color: goldenrod;
+    height: 100%;
+    border-radius: 25px;
+}
+.skills-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.skills-text {
+    width: 40%;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5vw;
+    text-align: left;
+}
+
+.skills-bars {
+    width: 55%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+}
+
+.skill {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5vw;
+}
+
+.skill span {
+    width: 40%;
+    font-size: 1vw;
+}
+
+
+
+.progress {
+    background-color: #4CAF50;
+    height: 0.8vw;
+    border-radius: 20px;
+    transition: width 1s ease-in-out;
+}
+.skills-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.skills-text {
+    width: 40%;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5vw;
+    text-align: left;
+}
+
+.skills-bars {
+    width: 55%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+}
+
+.skill {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5vw;
+}
+
+.skill span {
+    width: 40%;
+    font-size: 1vw;
+}
+
+
+
+.progress {
+    background-color: #4CAF50;
+    height: 0.8vw;
+    border-radius: 20px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+@keyframes loading {
+    0% {
+        left: -50%;
+    }
+    50% {
+        left: 100%;
+    }
+    100% {
+        left: -50%;
+    }
+}
+.skills-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.skills-text {
+    width: 40%;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5vw;
+    text-align: left;
+}
+
+.skills-bars {
+    width: 55%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+}
+
+.skill {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5vw;
+}
+
+.skill span {
+    width: 40%;
+    font-size: 1vw;
+}
+
+.progress-bar {
+    width: 60%;
+    background-color: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress {
+    background-color: #4CAF50;
+    height: 0.8vw;
+    border-radius: 20px;
+    width: 100%;
+    position: relative;
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+    background-size: 20px 20px;
+    animation: diagonal-stripes 1s linear infinite;
+}
+
+@keyframes diagonal-stripes {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 20px 20px;
+    }
+}
+.skills-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.skills-text {
+    width: 40%;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5vw;
+    text-align: left;
+}
+
+.skills-bars {
+    width: 55%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+}
+
+.skill {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5vw;
+}
+
+.skill span {
+    width: 40%;
+    font-size: 1vw;
+}
+
+.progress-bar {
+    width: 60%;
+    background-color: #eee; /* Fundo mais claro */
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress {
+    background-color: #4CAF50; /* Cor da barra de progresso */
+    height: 0.8vw;
+    border-radius: 20px;
+    width: 100%;
+    position: relative;
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+    background-size: 10px 10px; /* Tamanho reduzido das barras diagonais */
+    animation: diagonal-stripes 1s linear infinite;
+}
+
+@keyframes diagonal-stripes {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 10px 10px; /* Ajuste do movimento das barras diagonais */
+    }
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007BFF; /* Cor do botão */
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Cor do botão quando o mouse passa sobre ele */
+}
