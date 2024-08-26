@@ -285,7 +285,8 @@ footer ul li a {
 
 
 .progress-bar {
-    background-color: goldenrod;
+/*     background-color: goldenrod; */
+    backgrond-color: rgb(5,113,204);
     height: 100%;
     border-radius: 25px;
 }
