@@ -182,10 +182,11 @@ t {
 .background_img {
     background-image: linear-gradient(to left, transparent 0%, #121212 80%), url("../imagens/sherlock_filme.jpeg");
     background-size: cover;
+    background-position: center;
     height: 800px;
     margin-left: auto;
     margin-right: auto;
-    max-width: 1200px;
+    max-width: 100%;
 }
 
 .logo {
@@ -226,6 +227,7 @@ t {
 
     .background_img {
         height: 400px;
+        background-position: center;
     }
     
     .background {
