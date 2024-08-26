@@ -5,6 +5,20 @@ t{
     margin-left: 20px;
     margin-top: 20px;
 }
+.card{
+  list-style: none;
+  position: relative;
+  float: left;
+}
+
+.card:before{
+  content: '';
+  display: block;
+  padding-bottom: 150%;
+  width: 100%;
+  float: left;
+}
+
 .margin{
     margin-left: 20px;
 }
