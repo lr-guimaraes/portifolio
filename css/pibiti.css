@@ -245,3 +245,111 @@ t {
         margin: 5px 0;
     }
 }
+/* CSS geral para o layout */
+.background {
+    padding: 20px;
+}
+
+.background_img {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.card {
+    list-style: none;
+    position: relative;
+    float: left;
+}
+
+.card:before {
+    content: '';
+    display: block;
+    padding-bottom: 150%;
+    width: 100%;
+    float: left;
+}
+
+.margin {
+    margin-left: 20px;
+}
+
+.button_watch,
+.button_netflix,
+.button_prime,
+.button_disney,
+.button_just,
+.button_globo,
+.button_telecine,
+.button_hbo,
+.button_star {
+    color: #fff;
+    border: none;
+    align-items: center;
+    width: 100%;
+    max-width: 150px;
+    height: 60px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.button_watch:hover,
+.button_netflix:hover,
+.button_prime:hover,
+.button_disney:hover,
+.button_just:hover,
+.button_globo:hover,
+.button_telecine:hover,
+.button_hbo:hover,
+.button_star:hover {
+    opacity: 0.8;
+}
+
+/* Estilos específicos para o layout de tabelas e imagens */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+iframe {
+    max-width: 100%;
+    height: auto;
+    border: none;
+}
+
+img.icons {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Estilo para seções específicas */
+.headerNavs ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.headerNavs li {
+    margin: 0 10px;
+}
+
+.headerNavs a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* Flexbox para o layout de etapas de desenvolvimento */
+.trailer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.trailer iframe {
+    flex: 1;
+    min-width: 300px;
+}
