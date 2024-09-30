@@ -16,7 +16,7 @@
 
         /* Estilo de fundo com imagem e degradê */
         .background {
-            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 1)), url('icons/fundo.jpg');
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 1)), url('icons/fundo.jpg'); /* Verifique o caminho da imagem aqui */
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -47,8 +47,9 @@
             left: 20px;
         }
 
-        .project-logo  {
-            max-width: 150px;
+        /* Ajustando o tamanho do logo */
+        .project-logo img {
+            max-width: 100px; /* Reduzido para 100px */
         }
 
         .project-description {
@@ -99,7 +100,7 @@
             max-width: 30%;
         }
 
-        .photo-item  {
+        .photo-item img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
