@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Inclua seu arquivo CSS aqui -->
+    <title>Projeto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .project-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .project-logo {
+            margin-bottom: 20px;
+        }
+        .project-video {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+        .photo-gallery {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .photo-item {
+            flex: 1;
+            margin: 10px;
+            max-width: 32%;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        h1, h2 {
+            color: #0fdaf1;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="project-header">
+            <h1>Fit IA muscle</h1>
+            <div class="project-logo">
+                <img src="icons\project1.webp" alt="Logo do Projeto" style="max-width: 200px;">
+            </div>
+        </div>
+        
+        <div class="project-video">
+            <iframe src="icons\ia.mp4" allowfullscreen></iframe>
+        </div>
+        
+        <h2>Galeria de Fotos</h2>
+        <div class="photo-gallery">
+            <div class="photo-item">
+                <img src="icons/foto1.jpg" alt="Foto 1">
+            </div>
+            <div class="photo-item">
+                <img src="icons/foto2.jpg" alt="Foto 2">
+            </div>
+            <div class="photo-item">
+                <img src="icons/foto3.jpg" alt="Foto 3">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
