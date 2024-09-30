@@ -365,7 +365,7 @@ body {
 /* ----------INTRO----------*/
 
 .intro {
-  background: var(--gradient-color), url(../img/fotos/home-bg.jpg);
+  background: var(--gradient-color), url(../icons/prog.jpeg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
