@@ -97,7 +97,7 @@
             max-width: 30%;
         }
 
-        .photo-item img {
+        .photo-item img, .photo-item video {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
@@ -132,7 +132,10 @@
             <h3 class="gallery-title">Construção</h3>
             <div class="photo-row">
                 <div class="photo-item">
-                    <iframe src="icons/IA.mp4" alt="Construção 1">
+                    <video controls>
+                        <source src="icons/IA.mp4" type="video/mp4">
+                        Seu navegador não suporta a reprodução de vídeo.
+                    </video>
                 </div>
                 <div class="photo-item">
                     <img src="RA/2.png" alt="Construção 2">
