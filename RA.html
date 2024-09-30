@@ -8,62 +8,78 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
+            background-color: #1a1a1a;
             color: #fff;
             margin: 0;
             padding: 0;
+        }
+
+        /* Estilo de fundo com imagem e degradê */
+        .background {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 1)), url('icons/fundo.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            position: relative;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 2;
         }
 
         .project-header {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-end;
+            height: 50vh;
+            padding: 20px;
         }
 
-        .project-video {
-            width: 60%;
-            margin-right: 20px;
-        }
-
-        iframe {
-            width: 100%;
-            height: 450px;
-            border: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        }
-
-        .project-description {
-            width: 40%;
+        /* Estilo do logo no canto superior esquerdo */
+        .project-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
         }
 
         .project-logo img {
-            max-width: 200px;
+            max-width: 150px;
+        }
+
+        .project-description {
+            color: #fff;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        .project-description h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: #0fdaf1;
         }
 
         .project-description p {
             font-size: 18px;
-            color: #ccc;
             line-height: 1.6;
+            color: #ccc;
         }
 
-        h1, h2 {
+        h2, h3 {
             color: #0fdaf1;
-            font-weight: bold;
         }
 
+        /* Estilo da galeria de fotos */
         .photo-gallery {
             margin-top: 40px;
         }
 
         .gallery-section {
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
 
         .gallery-title {
@@ -83,7 +99,7 @@
             max-width: 30%;
         }
 
-        img {
+        .photo-item img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
@@ -93,26 +109,22 @@
 </head>
 <body>
 
-    <div class="container">
-        <div class="project-header">
-            <div class="project-video">
-                <iframe src="https://www.youtube.com/embed/example_video"></iframe> <!-- Substitua com o link do seu vídeo -->
-            </div>
-            <div class="project-description">
-                <h1>Reconstrução 3D</h1>
-                <p>O propósito do projeto é desenvolver um protótipo de um sistema 
-computacional, utilizando reconstrução 3D de objetos baseada em nuvens de pontos, 
-no qual serão adquiridas a partir de uma câmera Tof e serão aplicadas em um 
-ambiente virtual de simulação imersiva e realidade mista (RM), a fim de ser aplicado 
-em treinamento de trabalhadores de chão de fábrica, no qual os mesmos, poderão 
-efetuar manipulações de equipamentos virtualmente, aplicando o contexto de fábricas 
-inteligentes.</p>
+    <!-- Seção de fundo com imagem e degradê -->
+    <div class="background">
+        <div class="container">
+            <div class="project-header">
                 <div class="project-logo">
                     <img src="icons/project3.webp" alt="Logo do Projeto">
                 </div>
+                <div class="project-description">
+                    <h1>Reconstrução 3D</h1>
+                    <p>O propósito do projeto é desenvolver um protótipo de um sistema computacional, utilizando reconstrução 3D de objetos baseada em nuvens de pontos, no qual serão adquiridas a partir de uma câmera Tof e aplicadas em um ambiente virtual de simulação imersiva e realidade mista (RM), a fim de ser aplicado em treinamento de trabalhadores de chão de fábrica.</p>
+                </div>
             </div>
         </div>
+    </div>
 
+    <div class="container">
         <h2>Galeria de Fotos</h2>
 
         <!-- Linha 1: Construção -->
@@ -128,9 +140,6 @@ inteligentes.</p>
                 <div class="photo-item">
                     <img src="RA/3.png" alt="Construção 3">
                 </div>
-                <div class="photo-item">
-                    <img src="RA/4.png" alt="Construção 3">
-                </div>
             </div>
         </div>
 
@@ -139,19 +148,13 @@ inteligentes.</p>
             <h3 class="gallery-title">Renderização</h3>
             <div class="photo-row">
                 <div class="photo-item">
-                    <img src="RA/5.png" alt="Construção 3">
+                    <img src="RA/5.png" alt="Renderização 1">
                 </div>
                 <div class="photo-item">
                     <img src="RA/6.png" alt="Renderização 2">
                 </div>
                 <div class="photo-item">
                     <img src="RA/7.png" alt="Renderização 3">
-                </div>
-                <div class="photo-item">
-                    <img src="RA/8.png" alt="Renderização 3">
-                </div>
-                <div class="photo-item">
-                    <img src="RA/9.png" alt="Renderização 3">
                 </div>
             </div>
         </div>
@@ -169,12 +172,8 @@ inteligentes.</p>
                 <div class="photo-item">
                     <img src="RA/12.png" alt="Modelo Físico 3">
                 </div>
-                <div class="photo-item">
-                    <img src="RA/13.png" alt="Modelo Físico 3">
-                </div>                
             </div>
         </div>
-
     </div>
 
 </body>
