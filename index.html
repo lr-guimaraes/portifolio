@@ -11,34 +11,6 @@
   <script>
     // PROTECT FROM JAVASCRIPT OFF
     document.documentElement.className += "js"
-
-    // Função para mudar o idioma
-    function toggleLanguage() {
-      const elements = {
-        greeting: document.getElementById("greeting"),
-        name: document.getElementById("name"),
-        profession: document.getElementById("profession"),
-        aboutTitle: document.getElementById("about-title"),
-        aboutText: document.getElementById("about-text"),
-      };
-
-      const isEnglish = elements.greeting.innerText === "Hello, visitor!";
-      
-      // Mudar texto com base no idioma
-      if (isEnglish) {
-        elements.greeting.innerText = "Olá, visitante!";
-        elements.name.innerText = "Meu nome é Leandro";
-        elements.profession.innerText = "Desenvolvedor Full stack";
-        elements.aboutTitle.innerText = "Conheça mais sobre mim";
-        elements.aboutText.innerHTML = "Olá! Meu nome é Leandro e sou estudante de Engenharia de Computação. Atualmente estou cursando o 10º período, aprofundando meus conhecimentos e habilidades na área. Trabalho como desenvolvedor Full Stack de Nível Médio, onde tenho a oportunidade de criar e aprimorar soluções tecnológicas completas, desde interfaces de usuário, implementação utilizando IA, RA.";
-      } else {
-        elements.greeting.innerText = "Hello, visitor!";
-        elements.name.innerText = "My name is Leandro";
-        elements.profession.innerText = "Full stack developer";
-        elements.aboutTitle.innerText = "Learn more about me";
-        elements.aboutText.innerHTML = "Hello! My name is Leandro, and I am a Computer Engineering student. I am currently in my 10th semester, deepening my knowledge and skills in the field. I work as a Full Stack developer, where I have the opportunity to create and improve complete technological solutions, from user interfaces to implementation using AI and AR.";
-      }
-    }
   </script>
 </head>
 
@@ -74,7 +46,6 @@
           <span class="ball"></span>
         </label>
       </div>
-      <button onclick="toggleLanguage()" class="language-button">EN/PT</button>
     </div>
   </header>
 
@@ -89,9 +60,9 @@
 
     <section class="intro center-container" id="home">
       <div class="intro-container container">
-        <p id="greeting">Olá, visitante! <span>👋</span></p>
-        <h1 id="name">Meu nome é Leandro</h1>
-        <p id="profession">Desenvolvedor Full stack</p>
+        <p>Olá, visitante! <span>👋</span></p>
+        <h1>Meu nome é Leandro</h1>
+        <p>Desenvolvedor Full stack</p>
         <ul class="social-list">
           <li>
             <a href="https://www.linkedin.com/in/leandro-ricardo-guimarães-a87b981b4/" target="_blank">
@@ -105,7 +76,7 @@
           </li>
           <li>
             <a href="mailto:yleandrorg307@gmail.com" target="_blank">
-              <i class="bi bi-envelope"></i>
+              <i class="bi bi-envelope"></i></i>
             </a>
           </li>
         </ul>
@@ -118,7 +89,7 @@
     <!-- ABOUT -->
     <section class="about container section js-scroll" id="about">
       <div class="section-title">
-        <p id="about-title">SOBRE MIM</p>
+        <p>SOBRE MIM</p>
         <h1>Conheça mais sobre mim</h1>
         <div class="title-detail">
           <div class="bar"></div>
@@ -129,7 +100,9 @@
       </div>
       <div class="about-content">
         <div class="about-text">
-          <p id="about-text">Olá! Meu nome é Leandro e sou estudante de Engenharia de Computação. Atualmente estou cursando o 10º período, aprofundando meus conhecimentos e habilidades na área. Trabalho como desenvolvedor Full Stack de Nível Médio, onde tenho a oportunidade de criar e aprimorar soluções tecnológicas completas, desde interfaces de usuário, implementação utilizando IA, RA.</p>
+          <p>eOlá! Meu nome é Leandro e sou estudante de Engenheira de Computação. Atualmente estou cursando o 10º periodo, aprofundando meus conhecimentos e habilidades na área. Trabalho como desenvolvedor Full Stack</p>
+          <p>de Nível Médio, onde tenho a oportunidade de criar e aprimorar soluções tecnológicas completas, desde interfaces de usuário, implementação ultilizando IA, RA.</p>
+
         </div>
 
         <div class="slide">
@@ -166,57 +139,15 @@
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section class="projects section js-scroll" id="projects">
-      <div class="container">
-        <div class="section-title">
-          <div class="title-projects">
-            <p>Meus trabalhos</p>
-            <h1 style="color: #0fdaf1; font-weight: bold;">Projetos</h1>
-            <div class="title-detail">
-              <div class="bar"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-              <div class="ball"></div>
-            </div>
-          </div>
-        </div>
-        <div class="project-container">
-          <div class="project-item" style="display: flex; margin-bottom: 20px;">
-            <div class="project-image" style="flex: 1;">
-              <img src="icons/project1.webp" alt="Descrição do projeto" style="max-width: 100%; height: auto;">
-            </div>
-            <div class="project-content" style="flex: 2; padding-left: 20px;">
-              <h2 style="color: #0fdaf1; font-weight: bold;">Fit IA muscle</h2>
-              <div>
-                <a>Software utilizando para analisar a execução de exercícios de musculação.<br>
-                  O sistema avalia se os movimentos estão sendo realizados <br>
-                  corretamente, fornecendo feedback em tempo real para garantir<br>
-                  que os praticantes executem os exercícios de maneira adequada,<br>
-                  reduzindo o risco de lesões e melhorando a eficiência do treino.</a>
-              </div>
-              <div class="project-skills">
-                <span style="color: #0fdaf1; font-weight: bold;">Habilidades:</span>
-                <ul>
-                  <li>Python</li>
-                  <li>OpenCV</li>
-                  <li>IA</li>
-                </ul>
-              </div>
-              <a href="fit.html" class="button">Saiba mais</a>
-            </div>
-          </div>
-          <!-- Adicione mais projetos aqui, seguindo o mesmo padrão -->
-        </div>
-      </div>
-    </section>
 
-    <!-- CONTACT -->
-    <section class="contact section js-scroll" id="contact">
-      <div class="container">
-        <div class="section-title">
-          <p>Entre em contato</p>
-          <h1>Fale comigo</h1>
+    <!-- PROJECTS -->
+<!-- Updated PROJECTS Section -->
+<section class="projects section js-scroll" id="projects">
+    <div class="container">
+      <div class="section-title">
+        <div class="title-projects">
+          <p>Meus trabalhos</p>
+          <h1 style="color: #0fdaf1; font-weight: bold;">Projetos</h1>
           <div class="title-detail">
             <div class="bar"></div>
             <div class="ball"></div>
@@ -224,24 +155,212 @@
             <div class="ball"></div>
           </div>
         </div>
-        <form action="enviar_email.php" method="POST" class="contact-form">
-          <input type="text" name="name" placeholder="Seu Nome" required>
-          <input type="email" name="email" placeholder="Seu Email" required>
-          <textarea name="message" placeholder="Sua Mensagem" required></textarea>
-          <button type="submit">Enviar</button>
-        </form>
+      </div>
+      <div class="project-container">
+        <div class="project-item" style="display: flex; margin-bottom: 20px;">
+          <div class="project-image" style="flex: 1;">
+            <img src="icons/project1.webp" alt="Descrição do projeto" style="max-width: 100%; height: auto;">
+          </div>
+          <div class="project-content" style="flex: 2; padding-left: 20px;">
+            <h2 style="color: #0fdaf1; font-weight: bold;">Fit IA muscle</h2>
+            <div>
+                <a>Software ultilizando para analisar a execução de exercícios de musculação.<br>
+                     O sistema avalia se os movimentos estão sendo realizados <br>
+                     corretamente, fornecendo feedback em tempo real para garantir<br>
+                      que os praticantes executem os exercícios de maneira adequada,<br>
+                      reduzindo o risco de lesões e melhorando a eficiência do treino.</a>
+            </div>
+            <div class="project-skills" style="display: flex; flex-wrap: wrap;">
+              <p style="margin-right: 10px; font-weight: bold;">Python</p>
+              <p style="margin-right: 10px; font-weight: bold;">React Native</p>
+              <p style="margin-right: 10px; font-weight: bold;">Processamento de imagens</p>
+              <p style="margin-right: 10px; font-weight: bold;">Estimação de pose</p>
+              <p style="margin-right: 10px; font-weight: bold;">Inteligência artificial</p>
+            </div>
+            <div class="project-links">
+              <a href="fit.html" target="_blank">
+                <i class="bi bi-eye"></i> Ver Projeto
+              </a>
+            </div>
+          </div>
+        </div>
+  
+        <div class="project-item" style="display: flex; margin-bottom: 20px;">
+          <div class="project-image" style="flex: 1;">
+            <img src="icons/project2.webp" alt="Descrição do projeto" style="max-width: 100%; height: auto;">
+          </div>
+          <div class="project-content" style="flex: 2; padding-left: 20px;">
+            <h2 style="color: #0fdaf1; font-weight: bold;">Reconstrução 3D para ambientes<br> interativos</h2>
+            <div>
+                <a>Software ultilizando para analisar a execução de exercícios de musculação.<br>
+                     O sistema avalia se os movimentos estão sendo realizados <br>
+                     corretamente, fornecendo feedback em tempo real para garantir<br>
+                      que os praticantes executem os exercícios de maneira adequada,<br>
+                      reduzindo o risco de lesões e melhorando a eficiência do treino.</a>
+            </div>
+            <div class="project-skills" style="display: flex; flex-wrap: wrap;">
+              <p style="margin-right: 10px; font-weight: bold;">Python</p>
+              <p style="margin-right: 10px; font-weight: bold;">C#</p>
+              <p style="margin-right: 10px; font-weight: bold;">Unity</p>
+              <p style="margin-right: 10px; font-weight: bold;">Processamento de imagens</p>
+            </div>
+            <div class="project-links">
+              <a href="RA.html" target="_blank">
+                <i class="bi bi-eye"></i> Ver Projeto
+              </a>
+            </div>
+          </div>
+        </div>
+  
+        <div class="project-item" style="display: flex; margin-bottom: 20px;">
+        
+          <div class="project-image" style="flex: 1;">
+            <img src="icons/sustentabuid.jpg" alt="Descrição do projeto" style="max-width: 100%; height: auto;">
+          </div>
+          <div class="project-content" style="flex: 2; padding-left: 20px;">
+            <h2 style="color: #0fdaf1; font-weight: bold;">SustentaBuild</h2>
+              <div>
+            <a>Software desenvolvido para calcular o ciclo de vida do carbono<br>
+            des da sua concepção até a utlização do mesmo na obra</a>
+         
+            </div>
+            <div class="project-skills" style="display: flex; flex-wrap: wrap;">
+              <p style="margin-right: 10px; font-weight: bold;">HTML</p>
+              <p style="margin-right: 10px; font-weight: bold;">JavaScript</p>
+              <p style="margin-right: 10px; font-weight: bold;">CSS</p>
+            </div>
+            <div class="project-links">
+              <a href="https://sustentabuild.com" target="_blank">
+                <i class="bi bi-eye"></i> Ver Projeto
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-item" style="display: flex; margin-bottom: 20px;">
+            <div class="project-image" style="flex: 1;">
+                <img src="icons/avaliação fisica.jpg" alt="Descrição do projeto" style="max-width: 100%; height: auto;">
+              </div>
+          <div class="project-content" style="flex: 2; padding-left: 20px;">
+            <h2 style="color: #0fdaf1; font-weight: bold;">Avaliação fisica</h2>
+            <div>
+                <a>Sistema especialista ultilizando para analisar a composição <br>
+                    fisicado paciente e retornar um feedback, baseado <br>
+                no seu nivel de gordura, idade entre outros paramentros.</a>
+            </div>
+
+            <div class="project-skills" style="display: flex; flex-wrap: wrap;">
+            <div>
+                <a>Python</a>
+            </div>
+            </div>
+            <div class="project-links">
+              <a href="https://gitlab.com/lr-guimaraes/definicao-biotipo" target="_blank">
+                <i class="bi bi-eye"></i> Ver Projeto
+              </a>
+            </div>
+          </div>
+        </div>
+  
+        <div class="project-item" style="display: flex; margin-bottom: 20px;">
+<!--           <div class="project-image" style="flex: 1;">
+            <img src="icons/maisprojetos.jpg" alt="Descrição do projeto" style="max-width: 100%; height: auto;">
+          </div> -->
+          <div class="project-content" style="flex: 2; padding-left: 20px;">
+            <h2 style="color: #0fdaf1; font-weight: bold;">Mais projetos</h2>
+            <div class="project-links">
+              <a href="https://gitlab.com/lr-guimaraes" target="_blank">
+                <i class="bi bi-eye"></i> Ver Projeto
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ <section class="resume-link container section js-scroll" id="resume">
+  <div class="section-title">
+    <p>MEU CURRÍCULO</p>
+    <h1>Veja meu currículo</h1>
+    <div class="title-detail">
+      <div class="bar"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+    </div>
+  </div>
+  <div class="resume-content">
+    <a href="curriculo.pdf" target="_blank" class="resume-button" style="display: inline-block; padding: 10px 20px; background-color: #0fdaf1; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+      Baixar Currículo (PDF)
+    </a>
+  </div>
+</section>
+ 
+    <!-- CONTACT -->
+    <section class="contact section js-scroll ativo" id="contact">
+      <div class="container">
+        <div class="section-title">
+          <p>Onde você pode me achar...</p>
+          <h1>Contato</h1>
+          <div class="title-detail">
+            <div class="bar"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+          </div>
+        </div>
+        <div class="contact-container">
+          <p>Aqui pode encontrar os principais meios de entrar em contato comigo.</p>
+          <ul class="contact-list">
+            <li>
+              <a href="https://www.linkedin.com/in/leandro-ricardo-guimarães-a87b981b4/" target="_blank">
+                <i class="bi bi-linkedin"></i>
+                <span>Leandro Ricardo Guimarães</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://gitlab.com/lr-guimaraes" target="_blank">
+                <i class="bi bi-github"></i>
+                <span>LeandroGuimaraes</span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:leandrorg307@gmail.com" target="_blank">
+                <i class="bi bi-envelope"></i>
+                <span>leandrorg307@gmail.com</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer>
-      <div class="footer-container">
-        <p>&copy; 2024 Leandro Guimarães. Todos os direitos reservados.</p>
-      </div>
-    </footer>
-  </main>
 
-  <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons.js"></script>
+  </main>
+  <footer>
+    <div class="footer container">
+      <div>
+        <ul class="footer-list">
+          <li>
+            <a href="#">
+              <i class="bi bi-linkedin"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="bi bi-github"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="bi bi-envelope"></i></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div>© Todos os direitos reservados a Leandro Guimarães</div>
+    </div>
+  </footer>
   <script src="./js/script.js"></script>
 </body>
 
