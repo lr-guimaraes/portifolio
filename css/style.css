@@ -1100,13 +1100,13 @@ footer {
        order: 2; /* Depois do switcher de tema */
    }
   /*---------- LANGUAGE SWITCHER ----------*/
-/*---------- LANGUAGE SWITCHER ----------*/
+/*---------- LANGUAGE SWITCHER (Flag Background) ----------*/
 
 .language-switcher {
   display: flex;
   align-items: center;
   margin: 0 10px;
-  order: 2; /* Manter ordem padrão mobile */
+  order: 2;
   z-index: 5;
 }
 
@@ -1116,115 +1116,54 @@ footer {
 }
 
 .lang-label {
-  /* Estado Padrão (Português) */
-  background-color: #009c3b; /* Verde da bandeira do Brasil */
+  /* Default: Portuguese Flag Background */
+  background-image: url('../icons/br.png'); /* Bandeira BR como fundo */
+  background-size: cover; /* Faz a imagem cobrir toda a área */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Evita repetição */
   width: 50px;
   height: 22px;
   border-radius: 50px;
-  position: relative;
+  position: relative; /* Necessário para a posição absoluta da bola */
   cursor: pointer;
-  display: flex;
+  display: flex; /* Mantido para consistência, mas não essencial para a bola */
   align-items: center;
-  transition: background-color 0.2s linear; /* Transição suave da cor de fundo */
-  /* Removido padding e justify-content pois não há mais ícones fixos dentro */
+  overflow: hidden; /* IMPORTANTE: Garante que o fundo seja cortado pelo border-radius */
+  /* Transição para a troca da imagem de fundo (troca instantânea) */
+  transition: background-image 0.2s step-end;
+  /* Adiciona uma borda sutil para melhor definição visual */
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .lang-label .lang-ball {
-  /* Estado Padrão (Português) */
-  background-color: #FFF; /* Fundo branco para a imagem ficar visível */
-  background-image: url('../icons/br.png'); /* Imagem da bandeira BR */
-  background-size: contain; /* Ajusta a imagem para caber inteira */
-  background-position: center;
-  background-repeat: no-repeat;
+  /* A bola agora é apenas um indicador visual */
+  background-color: var(--color-primary); /* Cor primária do tema atual */
+  /* Ou uma cor fixa, ex: #ffffff com alguma sombra */
+  /* background-color: rgba(255, 255, 255, 0.9); */
+  /* border: 1px solid rgba(0,0,0,0.2); */
   width: 20px;
   height: 20px;
   position: absolute;
   left: 1px;
   top: 1px;
   border-radius: 50%;
-  transition: transform 0.2s linear, background-image 0.2s step-end; /* Transição para movimento e troca de imagem */
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); /* Sombra sutil opcional */
+  /* Sombra para destacar a bola do fundo */
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4);
+  /* Transição apenas para o movimento */
+  transition: transform 0.2s linear;
 }
 
-/* Estado Marcado (Inglês) */
+/* Checked State: English Flag Background */
 .lang-checkbox:checked + .lang-label {
-  background-color: #b22234; /* Vermelho da bandeira dos EUA */
+  background-image: url('../icons/us.png'); /* Muda para bandeira US */
 }
 
+/* Checked State: Move Ball */
 .lang-checkbox:checked + .lang-label .lang-ball {
-  transform: translateX(28px); /* Move a bola para a direita */
-  background-image: url('../icons/us.png'); /* Imagem da bandeira US */
+  transform: translateX(28px); /* Move a bola */
 }
 
-/* Ajustar a ordem no header para desktop (igual antes) */
-@media (min-width: 600px) {
-  .language-switcher {
-      order: 0;
-      margin-left: 0;
-      margin-right: 20px;
-  }
-   .mode-color {
-      order: 1;
-   }
-   .nav-detail {
-       order: 2;
-   }
-}
-.language-switcher {
-  display: flex;
-  align-items: center;
-  margin: 0 10px;
-  order: 2; /* Manter ordem padrão mobile */
-  z-index: 5;
-}
-
-.lang-checkbox {
-  opacity: 0;
-  position: absolute;
-}
-
-.lang-label {
-  /* Estado Padrão (Português) */
-  background-color: #009c3b; /* Verde da bandeira do Brasil */
-  width: 50px;
-  height: 22px;
-  border-radius: 50px;
-  position: relative;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  transition: background-color 0.2s linear; /* Transição suave da cor de fundo */
-  /* Removido padding e justify-content pois não há mais ícones fixos dentro */
-}
-
-.lang-label .lang-ball {
-  /* Estado Padrão (Português) */
-  background-color: #FFF; /* Fundo branco para a imagem ficar visível */
-  background-image: url('../icons/br.png'); /* Imagem da bandeira BR */
-  background-size: contain; /* Ajusta a imagem para caber inteira */
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  left: 1px;
-  top: 1px;
-  border-radius: 50%;
-  transition: transform 0.2s linear, background-image 0.2s step-end; /* Transição para movimento e troca de imagem */
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); /* Sombra sutil opcional */
-}
-
-/* Estado Marcado (Inglês) */
-.lang-checkbox:checked + .lang-label {
-  background-color: #b22234; /* Vermelho da bandeira dos EUA */
-}
-
-.lang-checkbox:checked + .lang-label .lang-ball {
-  transform: translateX(28px); /* Move a bola para a direita */
-  background-image: url('../icons/us.png'); /* Imagem da bandeira US */
-}
-
-/* Ajustar a ordem no header para desktop (igual antes) */
+/* Desktop Order (igual às versões anteriores) */
 @media (min-width: 600px) {
   .language-switcher {
       order: 0;
