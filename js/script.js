@@ -88,53 +88,64 @@ const translations = {
 const langCheckbox = document.querySelector('.js-lang-checkbox');
 const htmlEl = document.documentElement;
 
+// ***** NOVO: Seleciona o link do botão de currículo *****
+const resumeButtonLink = document.querySelector('.resume-button');
+
 function setLanguage(lang) {
   htmlEl.setAttribute('lang', lang);
-  htmlEl.dataset.lang = lang; // Atualiza o data attribute também
-  localStorage.setItem('portfolioLang', lang); // Salva a preferência
+  htmlEl.dataset.lang = lang;
+  localStorage.setItem('portfolioLang', lang);
 
-  // Atualiza o estado do checkbox
+  // Atualiza o estado do checkbox de idioma
   langCheckbox.checked = lang === 'en-US';
 
-  // Aplica traduções
+  // ***** NOVO: Atualiza o link do currículo baseado no idioma *****
+  if (resumeButtonLink) { // Verifica se o elemento foi encontrado
+    const resumeFilename = (lang === 'en-US') ? 'cv en.pdf' : 'cv pt.pdf';
+    resumeButtonLink.href = resumeFilename;
+    console.log("Resume link set to:", resumeFilename); // Para depuração (opcional)
+  } else {
+    console.warn("Resume button link not found!"); // Aviso se não encontrar
+  }
+  // ***** FIM: Atualização do link do currículo *****
+
+
+  // Aplica traduções de texto (loop existente)
   document.querySelectorAll('[data-translate-key]').forEach(element => {
     const key = element.getAttribute('data-translate-key');
+    // ... (restante da lógica de tradução de texto) ...
+    // (Essa parte permanece igual à anterior)
     if (translations[lang] && translations[lang][key]) {
-        // Se for o <title>, atualiza textContent
         if (element.tagName === 'TITLE') {
              element.textContent = translations[lang][key];
         }
-        // Se for meta description, atualiza content
         else if (element.tagName === 'META' && element.name === 'description') {
             element.content = translations[lang][key];
         }
-        // Para a maioria dos outros elementos, innerHTML funciona bem (cuidado se tiver HTML dentro)
-        // Se for apenas texto, textContent é mais seguro
-        else if (element.children.length === 0 || key.includes('_desc') || key.includes('_text')) { // Se não tem filhos ou é uma descrição/texto longo
-             element.textContent = translations[lang][key]; // Use textContent para evitar problemas com HTML interno
+        else if (element.children.length === 0 || key.includes('_desc') || key.includes('_text') || element.closest('.resume-button')) { // Inclui o botão para atualizar o texto dele
+             element.textContent = translations[lang][key];
         } else {
-             // Se tem filhos (ex: links com spans dentro), tentamos atualizar apenas o nó de texto principal se possível
-             // Ou usamos innerHTML se a estrutura for simples e conhecida
-             element.innerHTML = translations[lang][key]; // Pode precisar de ajustes se a estrutura for complexa
+             element.innerHTML = translations[lang][key];
         }
-
     } else {
-      console.warn(`Translation key "${key}" not found for language "${lang}"`);
+      // Não traduz o link em si, apenas o texto interno dele
+      if (!element.closest('.resume-button') || key !== 'resume_button') {
+           console.warn(`Translation key "${key}" not found for language "${lang}"`);
+      }
     }
   });
 }
 
-// Event Listener para a troca de idioma
+// Event Listener para a troca de idioma (permanece igual)
 langCheckbox.addEventListener('change', () => {
   const newLang = langCheckbox.checked ? 'en-US' : 'pt-BR';
   setLanguage(newLang);
 });
 
-// Inicialização: Define o idioma ao carregar a página
+// Inicialização: Define o idioma ao carregar a página (permanece igual)
 document.addEventListener('DOMContentLoaded', () => {
-    // A linguagem já foi definida no <script> do <head> pelo localStorage ou padrão
     const initialLang = htmlEl.getAttribute('lang') || 'pt-BR';
-    setLanguage(initialLang); // Aplica as traduções e ajusta o checkbox
+    setLanguage(initialLang); // Chama a função que agora também atualiza o link
 });
 
 // --- FIM: LÓGICA DE TRADUÇÃO E IDIOMA ---
