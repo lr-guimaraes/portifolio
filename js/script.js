@@ -85,36 +85,52 @@ const translations = {
   }
 };
 
+// --- INÍCIO: LÓGICA DE TRADUÇÃO E IDIOMA ---
+
+// ... (objeto translations) ...
+
 const langCheckbox = document.querySelector('.js-lang-checkbox');
 const htmlEl = document.documentElement;
-
-// ***** NOVO: Seleciona o link do botão de currículo *****
-const resumeButtonLink = document.querySelector('.resume-button');
+// Seleciona o link do botão de currículo (vamos garantir que ele seja selecionado *depois* do DOM pronto)
+let resumeButtonLink = null; // Inicializa como null
 
 function setLanguage(lang) {
+  console.log('--- setLanguage called with lang:', lang, '---'); // Log 1: Função foi chamada? Qual idioma?
+
+  // Tenta selecionar o botão aqui dentro, caso ele não estivesse pronto antes
+  if (!resumeButtonLink) {
+      resumeButtonLink = document.querySelector('.resume-button');
+      console.log('Resume button selected inside setLanguage:', resumeButtonLink); // Log 2: Selecionou o botão?
+  }
+
   htmlEl.setAttribute('lang', lang);
   htmlEl.dataset.lang = lang;
   localStorage.setItem('portfolioLang', lang);
 
   // Atualiza o estado do checkbox de idioma
-  langCheckbox.checked = lang === 'en-US';
-
-  // ***** NOVO: Atualiza o link do currículo baseado no idioma *****
-  if (resumeButtonLink) { // Verifica se o elemento foi encontrado
-    const resumeFilename = (lang === 'en-US') ? 'cv en.pdf' : 'cv pt.pdf';
-    resumeButtonLink.href = resumeFilename;
-    console.log("Resume link set to:", resumeFilename); // Para depuração (opcional)
+  if (langCheckbox) { // Verifica se o checkbox existe
+      langCheckbox.checked = lang === 'en-US';
+      console.log('Checkbox checked state set to:', langCheckbox.checked); // Log 3: Checkbox atualizado?
   } else {
-    console.warn("Resume button link not found!"); // Aviso se não encontrar
+      console.warn('Language checkbox not found!');
   }
-  // ***** FIM: Atualização do link do currículo *****
 
+
+  // Atualiza o link do currículo baseado no idioma
+  if (resumeButtonLink) { // Verifica se o elemento foi encontrado
+    console.log('Updating resume link. Current href:', resumeButtonLink.href); // Log 4: Qual o href atual?
+    const resumeFilename = (lang === 'en-US') ? 'cv en.pdf' : 'cv pt.pdf';
+    console.log('Determined resume filename:', resumeFilename); // Log 5: Qual nome de arquivo foi decidido?
+    resumeButtonLink.href = resumeFilename;
+    console.log('Resume link AFTER update:', resumeButtonLink.href); // Log 6: O href foi realmente alterado no elemento?
+  } else {
+    console.warn("Resume button link variable is null or the element wasn't found!"); // Log 7: Aviso se não encontrar
+  }
 
   // Aplica traduções de texto (loop existente)
   document.querySelectorAll('[data-translate-key]').forEach(element => {
     const key = element.getAttribute('data-translate-key');
-    // ... (restante da lógica de tradução de texto) ...
-    // (Essa parte permanece igual à anterior)
+    // ... (restante da lógica de tradução de texto - sem alterações) ...
     if (translations[lang] && translations[lang][key]) {
         if (element.tagName === 'TITLE') {
              element.textContent = translations[lang][key];
@@ -122,31 +138,54 @@ function setLanguage(lang) {
         else if (element.tagName === 'META' && element.name === 'description') {
             element.content = translations[lang][key];
         }
-        else if (element.children.length === 0 || key.includes('_desc') || key.includes('_text') || element.closest('.resume-button')) { // Inclui o botão para atualizar o texto dele
+         // Ajuste para garantir que o texto DENTRO do botão seja atualizado corretamente
+         else if (element.matches('.resume-button') && key === 'resume_button') {
+             // Apenas atualiza o texto, não o href aqui
+             element.textContent = translations[lang][key];
+         }
+        else if (element.children.length === 0 || key.includes('_desc') || key.includes('_text')) {
              element.textContent = translations[lang][key];
         } else {
-             element.innerHTML = translations[lang][key];
+             // Evita sobrescrever o conteúdo do botão de currículo aqui se ele tiver filhos (ícones, etc)
+             if (!element.matches('.resume-button')) {
+                 element.innerHTML = translations[lang][key];
+             }
         }
     } else {
-      // Não traduz o link em si, apenas o texto interno dele
-      if (!element.closest('.resume-button') || key !== 'resume_button') {
-           console.warn(`Translation key "${key}" not found for language "${lang}"`);
+      // Não logar erro para a chave do botão, pois já tratamos o texto dele
+      if (!element.matches('.resume-button') || key !== 'resume_button') {
+          console.warn(`Translation key "${key}" not found for language "${lang}"`);
       }
     }
   });
+  console.log('--- setLanguage finished ---'); // Log 8: Função terminou
 }
 
 // Event Listener para a troca de idioma (permanece igual)
-langCheckbox.addEventListener('change', () => {
-  const newLang = langCheckbox.checked ? 'en-US' : 'pt-BR';
-  setLanguage(newLang);
-});
+if (langCheckbox) {
+    langCheckbox.addEventListener('change', () => {
+      console.log('--- Language checkbox changed! ---'); // Log 9: Evento disparado?
+      const newLang = langCheckbox.checked ? 'en-US' : 'pt-BR';
+      setLanguage(newLang);
+    });
+}
 
-// Inicialização: Define o idioma ao carregar a página (permanece igual)
+
+// Inicialização: Define o idioma ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('--- DOMContentLoaded event fired ---'); // Log 10: DOM pronto?
+    // Seleciona o botão aqui, garantindo que o DOM está pronto
+    resumeButtonLink = document.querySelector('.resume-button');
+    console.log('Initial resume button selection:', resumeButtonLink); // Log 11: Selecionou na carga?
+
     const initialLang = htmlEl.getAttribute('lang') || 'pt-BR';
     setLanguage(initialLang); // Chama a função que agora também atualiza o link
 });
+
+// --- FIM: LÓGICA DE TRADUÇÃO E IDIOMA ---
+
+// --- Coloque AQUI o restante do seu código JS (menu, tema, scroll, etc.) ---
+// ... (seu código JS existente para tema, menu, scroll, etc.) ...
 
 // --- FIM: LÓGICA DE TRADUÇÃO E IDIOMA ---
 
