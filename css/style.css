@@ -1008,4 +1008,70 @@ footer {
   .project-links a:hover {
     text-decoration: underline; /* Sublinhado ao passar o mouse */
   }
+/*---------- LANGUAGE SWITCHER ----------*/
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 15px; /* Ajuste conforme necessário */
+  order: 3; /* Ordem no flex container do header */
+  z-index: 5;
+}
+
+.lang-button {
+  background: none;
+  border: none;
+  color: var(--color-secondary); /* Cor padrão */
+  cursor: pointer;
+  font-size: 0.8rem; /* Tamanho da fonte */
+  font-weight: bold;
+  padding: 2px 5px;
+  transition: color 0.3s ease;
+}
+
+.lang-button:hover {
+  color: var(--primary-color); /* Cor ao passar o mouse */
+}
+
+.lang-button.active {
+  color: var(--primary-color); /* Cor do botão ativo */
+  /* text-decoration: underline; */ /* Opcional: sublinhado para ativo */
+   border-bottom: 2px solid var(--primary-color); /* Ou uma borda inferior */
+}
+
+.language-switcher span {
+    color: var(--color-secondary);
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* Ajuste para telas menores se o header ficar muito cheio */
+@media (max-width: 768px) {
+    .language-switcher {
+        margin-left: 10px; /* Menor margem */
+        gap: 3px;
+    }
+    /* Você pode precisar ajustar outros elementos do header também */
+}
+
+/* Adaptação para o menu responsivo (hamburger) */
+/* Se quiser que o botão apareça dentro do menu hamburguer em telas pequenas: */
+/* @media (max-width: 600px) {
+  .language-switcher {
+      position: absolute; 
+      bottom: 20px; 
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--bg-secondary); 
+      padding: 5px 10px;
+      border-radius: 10px;
+   }
+   .menu.active .language-switcher { 
+       display: flex; 
+   }
+   .header .language-switcher {
+       display: none; Se escondido fora do menu 
+   }
+} */ 
+/* A lógica acima é um exemplo, pode precisar de ajustes finos */
   
