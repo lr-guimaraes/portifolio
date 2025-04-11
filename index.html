@@ -1,25 +1,30 @@
 <!DOCTYPE html>
-<!-- Mudado lang inicial para pt -->
-<html lang="pt"> 
+<!-- Adicionado data-lang para referência inicial -->
+<html lang="pt-BR" data-lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Título traduzível -->
-  <title data-lang-pt="Leandro • Portfólio" data-lang-en="Leandro • Portfolio">Leandro • Portfólio</title>
-  <!-- Descrição traduzível -->
-  <meta name="description" 
-        content="Portfólio para apresentação de trabalhos de um desenvolvedor Full stack" 
-        data-lang-pt="Portfólio para apresentação de trabalhos de um desenvolvedor Full stack" 
-        data-lang-en="Portfolio showcasing the work of a Full Stack Developer">
+  <!-- Título será atualizado via JS -->
+  <title data-translate-key="page_title">Leandro • Portifólio</title>
+  <!-- Descrição será atualizada via JS -->
+  <meta name="description" content="Portifólio para apresentação de trabalhos de um desenvolvedor Full stack" data-translate-key="meta_description">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="shortcut icon" href="./icons/prog.jpeg" type="image/x-icon">
+  <!-- Ícones das bandeiras (adicione os arquivos reais na pasta icons) -->
+  <link rel="preload" href="./icons/br.png" as="image">
+  <link rel="preload" href="./icons/us.png" as="image">
   <script>
     // PROTECT FROM JAVASCRIPT OFF
-    document.documentElement.className += "js"
+    document.documentElement.className += "js";
+    // Tenta carregar o idioma salvo antes do DOM carregar completamente
+    const savedLang = localStorage.getItem('portfolioLang') || 'pt-BR';
+    document.documentElement.lang = savedLang;
+    document.documentElement.dataset.lang = savedLang;
   </script>
 </head>
 
+<!-- Define tema inicial, idioma será definido via JS -->
 <body class="dark_theme">
   <!-- HEADER -->
   <header class="header center-container js-header">
@@ -30,12 +35,11 @@
         </a>
       </div>
       <nav>
-        <!-- Menu traduzível -->
         <ul class="menu js-menu">
-          <li><a href="#home" data-lang-pt="Início" data-lang-en="Home">Início</a></li>
-          <li><a href="#about" data-lang-pt="Sobre" data-lang-en="About">Sobre</a></li>
-          <li><a href="#projects" data-lang-pt="Projetos" data-lang-en="Projects">Projetos</a></li>
-          <li><a href="#contact" data-lang-pt="Contato" data-lang-en="Contact">Contato</a></li>
+          <li><a href="#home" data-translate-key="nav_home">Início</a></li>
+          <li><a href="#about" data-translate-key="nav_about">Sobre</a></li>
+          <li><a href="#projects" data-translate-key="nav_projects">Projetos</a></li>
+          <li><a href="#contact" data-translate-key="nav_contact">Contato</a></li>
         </ul>
       </nav>
       <div class="hamburger">
@@ -47,12 +51,17 @@
 
       <!-- Botão de Idioma -->
       <div class="language-switcher">
-        <button id="lang-pt" class="lang-button active" data-lang="pt">PT</button>
-        <span>/</span>
-        <button id="lang-en" class="lang-button" data-lang="en">EN</button>
+        <input type="checkbox" class="lang-checkbox js-lang-checkbox" id="lang-checkbox">
+        <label for="lang-checkbox" class="lang-label">
+          <!-- Ícones como background da bola seria mais fácil, mas vamos usar imgs -->
+          <img src="./icons/br.png" alt="PT-BR" class="flag-icon flag-br">
+          <img src="./icons/us.png" alt="EN-US" class="flag-icon flag-us">
+          <span class="lang-ball"></span>
+        </label>
       </div>
       <!-- Fim Botão de Idioma -->
 
+      <!-- Botão de Tema -->
       <div class="mode-color">
         <input type="checkbox" class="checkbox js-checkbox" id="checkbox" checked>
         <label for="checkbox" class="checkbox-label">
@@ -61,6 +70,8 @@
           <span class="ball"></span>
         </label>
       </div>
+      <!-- Fim Botão de Tema -->
+
     </div>
   </header>
 
@@ -74,10 +85,9 @@
     <!-- INTRODUCTION -->
     <section class="intro center-container" id="home">
       <div class="intro-container container">
-        <!-- Texto traduzível -->
-        <p data-lang-pt="Olá, visitante!" data-lang-en="Hello, visitor!">Olá, visitante! <span>👋</span></p>
-        <h1 data-lang-pt="Meu nome é Leandro" data-lang-en="My name is Leandro">Meu nome é Leandro</h1>
-        <p data-lang-pt="Desenvolvedor Full stack" data-lang-en="Full Stack Developer">Desenvolvedor Full stack</p>
+        <p data-translate-key="intro_greeting">Olá, visitante! <span>👋</span></p>
+        <h1 data-translate-key="intro_name">Meu nome é Leandro</h1>
+        <p data-translate-key="intro_role">Desenvolvedor Full stack</p>
         <ul class="social-list">
           <li>
             <a href="https://www.linkedin.com/in/leandro-ricardo-guimarães-a87b981b4/" target="_blank" aria-label="LinkedIn">
@@ -86,7 +96,7 @@
           </li>
           <li>
             <a href="https://gitlab.com/lr-guimaraes" target="_blank" aria-label="GitLab">
-              <i class="bi bi-github"></i> <!-- Usei github icon, ajuste se tiver gitlab icon -->
+              <i class="bi bi-github"></i>
             </a>
           </li>
           <li>
@@ -96,7 +106,7 @@
           </li>
         </ul>
         <div class="scroll-down js-menu">
-          <a href="#about" data-lang-pt="scroll" data-lang-en="scroll">scroll</a>
+          <a href="#about" data-translate-key="intro_scroll">scroll</a>
         </div>
       </div>
     </section>
@@ -104,9 +114,8 @@
     <!-- ABOUT -->
     <section class="about container section js-scroll" id="about">
       <div class="section-title">
-        <!-- Texto traduzível -->
-        <p data-lang-pt="SOBRE MIM" data-lang-en="ABOUT ME">SOBRE MIM</p>
-        <h1 data-lang-pt="Conheça mais sobre mim" data-lang-en="Learn more about me">Conheça mais sobre mim</h1>
+        <p data-translate-key="about_section_title">SOBRE MIM</p>
+        <h1 data-translate-key="about_section_headline">Conheça mais sobre mim</h1>
         <div class="title-detail">
           <div class="bar"></div>
           <div class="ball"></div>
@@ -116,19 +125,12 @@
       </div>
       <div class="about-content">
         <div class="about-text">
-          <!-- Texto traduzível -->
-          <p data-lang-pt="Olá! Meu nome é Leandro e sou estudante de Engenharia de Computação. Atualmente estou cursando o 10º período, aprofundando meus conhecimentos e habilidades na área. Trabalho como desenvolvedor Full Stack" 
-             data-lang-en="Hello! My name is Leandro and I am a Computer Engineering student. I am currently in the 10th semester, deepening my knowledge and skills in the field. I work as a Full Stack Developer">
-             Olá! Meu nome é Leandro e sou estudante de Engenheira de Computação. Atualmente estou cursando o 10º periodo, aprofundando meus conhecimentos e habilidades na área. Trabalho como desenvolvedor Full Stack
-          </p>
-          <p data-lang-pt="de Nível Médio, onde tenho a oportunidade de criar e aprimorar soluções tecnológicas completas, desde interfaces de usuário, implementação utilizando IA, RA."
-             data-lang-en="Mid-Level, where I have the opportunity to create and enhance complete technological solutions, from user interfaces, implementation using AI, AR.">
-             de Nível Médio, onde tenho a oportunidade de criar e aprimorar soluções tecnológicas completas, desde interfaces de usuário, implementação ultilizando IA, RA.
-          </p>
+          <p data-translate-key="about_text_1">Olá! Meu nome é Leandro e sou estudante de Engenheira de Computação. Atualmente estou cursando o 10º periodo, aprofundando meus conhecimentos e habilidades na área. Trabalho como desenvolvedor Full Stack</p>
+          <p data-translate-key="about_text_2">de Nível Médio, onde tenho a oportunidade de criar e aprimorar soluções tecnológicas completas, desde interfaces de usuário, implementação ultilizando IA, RA.</p>
         </div>
 
         <div class="slide">
-          <!-- As skills geralmente não precisam de tradução, mas se quiser, pode adicionar -->
+          <!-- Skills não precisam de tradução geralmente -->
           <div class="slide-item"> <img src="./icons/html.svg" alt="HTML icon"> <p>HTML</p> </div>
           <div class="slide-item"> <img src="./icons/css.svg" alt="CSS icon"> <p>CSS</p> </div>
           <div class="slide-item"> <img src="./icons/javascript.svg" alt="JavaScript icon"> <p>JavaScript</p> </div>
@@ -137,190 +139,102 @@
           <div class="slide-item"> <img src="./icons/linux.webp" alt="Linux icon"> <p>Linux</p> </div>
           <div class="slide-item"> <img src="./icons/jaba.jpeg" alt="Java icon"> <p>Java</p> </div>
         </div>
-        <!-- Texto traduzível -->
-        <span data-lang-pt="Continue me conhecendo através dos meus trabalhos abaixo..."
-              data-lang-en="Continue getting to know me through my work below...">
-              Continue me conhecendo através dos meus trabalhos abaixo...
-        </span>
+        <span data-translate-key="about_continue">Continue me conhecendo através dos meus trabalhos abaixo...</span>
       </div>
     </section>
 
     <!-- PROJECTS -->
     <section class="projects section js-scroll" id="projects">
-        <div class="container">
-          <div class="section-title">
-            <div class="title-projects">
-              <!-- Texto traduzível -->
-              <p data-lang-pt="Meus trabalhos" data-lang-en="My work">Meus trabalhos</p>
-              <h1 style="color: #0fdaf1; font-weight: bold;" data-lang-pt="Projetos" data-lang-en="Projects">Projetos</h1>
-              <div class="title-detail">
-                <div class="bar"></div>
-                <div class="ball"></div>
-                <div class="ball"></div>
-                <div class="ball"></div>
-              </div>
-            </div>
-          </div>
-          <div class="project-container">
-            <!-- Projeto 1 -->
-            <div class="project-item" style="display: flex; margin-bottom: 20px;">
-              <div class="project-image" style="flex: 1;">
-                <img src="icons/project1.webp" alt="Fit IA Muscle project" style="max-width: 100%; height: auto;">
-              </div>
-              <div class="project-content" style="flex: 2; padding-left: 20px;">
-                <h2 style="color: #0fdaf1; font-weight: bold;">Fit IA muscle</h2>
-                <div>
-                    <!-- Descrição traduzível -->
-                    <a data-lang-pt="Software utilizado para analisar a execução de exercícios de musculação.<br> O sistema avalia se os movimentos estão sendo realizados <br> corretamente, fornecendo feedback em tempo real para garantir<br> que os praticantes executem os exercícios de maneira adequada,<br> reduzindo o risco de lesões e melhorando a eficiência do treino."
-                       data-lang-en="Software used to analyze the execution of weightlifting exercises.<br> The system evaluates if the movements are being performed <br> correctly, providing real-time feedback to ensure<br> practitioners perform the exercises properly,<br> reducing the risk of injuries and improving workout efficiency.">
-                       Software ultilizando para analisar a execução de exercícios de musculação.<br>
-                         O sistema avalia se os movimentos estão sendo realizados <br>
-                         corretamente, fornecendo feedback em tempo real para garantir<br>
-                          que os praticantes executem os exercícios de maneira adequada,<br>
-                          reduzindo o risco de lesões e melhorando a eficiência do treino.
-                    </a>
-                </div>
-                <div class="project-skills" style="display: flex; flex-wrap: wrap;">
-                  <p style="margin-right: 10px; font-weight: bold;">Python</p>
-                  <p style="margin-right: 10px; font-weight: bold;">React Native</p>
-                  <!-- Skills traduzíveis (opcional) -->
-                  <p style="margin-right: 10px; font-weight: bold;" data-lang-pt="Processamento de imagens" data-lang-en="Image Processing">Processamento de imagens</p>
-                  <p style="margin-right: 10px; font-weight: bold;" data-lang-pt="Estimação de pose" data-lang-en="Pose Estimation">Estimação de pose</p>
-                  <p style="margin-right: 10px; font-weight: bold;" data-lang-pt="Inteligência artificial" data-lang-en="Artificial Intelligence">Inteligência artificial</p>
-                </div>
-                <div class="project-links">
-                  <!-- Texto traduzível -->
-                  <a href="fit.html" target="_blank">
-                    <i class="bi bi-eye"></i> <span data-lang-pt="Ver Projeto" data-lang-en="View Project">Ver Projeto</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- Projeto 2 -->
-            <div class="project-item" style="display: flex; margin-bottom: 20px;">
-              <div class="project-image" style="flex: 1;">
-                <img src="icons/project2.webp" alt="3D Reconstruction project" style="max-width: 100%; height: auto;">
-              </div>
-              <div class="project-content" style="flex: 2; padding-left: 20px;">
-                <!-- Título traduzível -->
-                <h2 style="color: #0fdaf1; font-weight: bold;" data-lang-pt="Reconstrução 3D para ambientes<br> interativos" data-lang-en="3D Reconstruction for Interactive<br> Environments">Reconstrução 3D para ambientes<br> interativos</h2>
-                <div>
-                    <!-- Descrição traduzível -->
-                    <a data-lang-pt="Software para reconstrução 3D de ambientes usando sensores.<br> Permite criar modelos 3D interativos para diversas aplicações,<br> como realidade aumentada, virtualização de espaços<br> e planejamento arquitetônico, facilitando a visualização<br> e interação com ambientes digitalizados."
-                       data-lang-en="Software for 3D environment reconstruction using sensors.<br> Allows creating interactive 3D models for various applications,<br> such as augmented reality, space virtualization,<br> and architectural planning, facilitating visualization<br> and interaction with digitized environments.">
-                       Software ultilizando para analisar a execução de exercícios de musculação.<br>
-                         O sistema avalia se os movimentos estão sendo realizados <br>
-                         corretamente, fornecendo feedback em tempo real para garantir<br>
-                          que os praticantes executem os exercícios de maneira adequada,<br>
-                          reduzindo o risco de lesões e melhorando a eficiência do treino.
-                    </a>
-                </div>
-                <div class="project-skills" style="display: flex; flex-wrap: wrap;">
-                  <p style="margin-right: 10px; font-weight: bold;">Python</p>
-                  <p style="margin-right: 10px; font-weight: bold;">C#</p>
-                  <p style="margin-right: 10px; font-weight: bold;">Unity</p>
-                  <!-- Skills traduzíveis (opcional) -->
-                  <p style="margin-right: 10px; font-weight: bold;" data-lang-pt="Processamento de imagens" data-lang-en="Image Processing">Processamento de imagens</p>
-                </div>
-                <div class="project-links">
-                   <!-- Texto traduzível -->
-                  <a href="RA.html" target="_blank">
-                    <i class="bi bi-eye"></i> <span data-lang-pt="Ver Projeto" data-lang-en="View Project">Ver Projeto</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- Projeto 3 -->
-            <div class="project-item" style="display: flex; margin-bottom: 20px;">
-              <div class="project-image" style="flex: 1;">
-                <img src="icons/sustentabuid.jpg" alt="SustentaBuild project" style="max-width: 100%; height: auto;">
-              </div>
-              <div class="project-content" style="flex: 2; padding-left: 20px;">
-                <h2 style="color: #0fdaf1; font-weight: bold;">SustentaBuild</h2>
-                  <div>
-                     <!-- Descrição traduzível -->
-                     <a data-lang-pt="Software desenvolvido para calcular o ciclo de vida do carbono<br> dos materiais de construção, desde a sua concepção até a utilização<br> na obra, ajudando a tomar decisões mais sustentáveis."
-                        data-lang-en="Software developed to calculate the carbon lifecycle<br> of construction materials, from conception to use<br> on site, helping to make more sustainable decisions.">
-                       Software desenvolvido para calcular o ciclo de vida do carbono<br>
-                       des da sua concepção até a utlização do mesmo na obra
-                     </a>
-                  </div>
-                <div class="project-skills" style="display: flex; flex-wrap: wrap;">
-                  <p style="margin-right: 10px; font-weight: bold;">HTML</p>
-                  <p style="margin-right: 10px; font-weight: bold;">JavaScript</p>
-                  <p style="margin-right: 10px; font-weight: bold;">CSS</p>
-                </div>
-                <div class="project-links">
-                   <!-- Texto traduzível -->
-                  <a href="https://sustentabuild.com" target="_blank">
-                    <i class="bi bi-eye"></i> <span data-lang-pt="Ver Projeto" data-lang-en="View Project">Ver Projeto</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- Projeto 4 -->
-            <div class="project-item" style="display: flex; margin-bottom: 20px;">
-                <div class="project-image" style="flex: 1;">
-                    <img src="icons/avaliação fisica.jpg" alt="Physical Assessment project" style="max-width: 100%; height: auto;">
-                  </div>
-              <div class="project-content" style="flex: 2; padding-left: 20px;">
-                 <!-- Título traduzível -->
-                <h2 style="color: #0fdaf1; font-weight: bold;" data-lang-pt="Avaliação física" data-lang-en="Physical Assessment">Avaliação fisica</h2>
-                <div>
-                   <!-- Descrição traduzível -->
-                    <a data-lang-pt="Sistema especialista utilizado para analisar a composição<br> física do paciente e retornar um feedback, baseado<br> no seu nível de gordura, idade entre outros parâmetros."
-                       data-lang-en="Expert system used to analyze the patient's physical<br> composition and provide feedback based on<br> their body fat level, age, and other parameters.">
-                       Sistema especialista ultilizando para analisar a composição <br>
-                       fisicado paciente e retornar um feedback, baseado <br>
-                       no seu nivel de gordura, idade entre outros paramentros.
-                    </a>
-                </div>
-                <div class="project-skills" style="display: flex; flex-wrap: wrap;">
-                  <p style="margin-right: 10px; font-weight: bold;">Python</p> <!-- Se for só Python, pode tirar o <a> -->
-                </div>
-                <div class="project-links">
-                  <!-- Texto traduzível -->
-                  <a href="https://gitlab.com/lr-guimaraes/definicao-biotipo" target="_blank">
-                    <i class="bi bi-eye"></i> <span data-lang-pt="Ver Projeto" data-lang-en="View Project">Ver Projeto</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- Mais Projetos -->
-            <div class="project-item" style="display: flex; margin-bottom: 20px;">
-              <div class="project-content" style="flex: 1; padding-left: 20px;"> <!-- Ajustado flex para 1 pois não tem imagem -->
-                 <!-- Título traduzível -->
-                <h2 style="color: #0fdaf1; font-weight: bold;" data-lang-pt="Mais projetos" data-lang-en="More Projects">Mais projetos</h2>
-                <div class="project-links">
-                  <!-- Texto traduzível -->
-                  <a href="https://gitlab.com/lr-guimaraes" target="_blank">
-                    <i class="bi bi-eye"></i> <span data-lang-pt="Ver Projetos" data-lang-en="View Projects">Ver Projetos</span> <!-- Ajuste pequeno no texto -->
-                  </a>
-                </div>
-              </div>
-            </div>
+      <div class="container">
+        <div class="section-title">
+          <div class="title-projects">
+            <p data-translate-key="projects_section_title">Meus trabalhos</p>
+            <h1 style="color: #0fdaf1; font-weight: bold;" data-translate-key="projects_section_headline">Projetos</h1>
+            <div class="title-detail"> <div class="bar"></div> <div class="ball"></div> <div class="ball"></div> <div class="ball"></div> </div>
           </div>
         </div>
-      </section>
-
-     <!-- Resume Link -->
-     <section class="resume-link container section js-scroll" id="resume">
-      <div class="section-title">
-        <!-- Texto traduzível -->
-        <p data-lang-pt="MEU CURRÍCULO" data-lang-en="MY RESUME">MEU CURRÍCULO</p>
-        <h1 data-lang-pt="Veja meu currículo" data-lang-en="See my resume">Veja meu currículo</h1>
-        <div class="title-detail">
-          <div class="bar"></div>
-          <div class="ball"></div>
-          <div class="ball"></div>
-          <div class="ball"></div>
+        <div class="project-container">
+          <!-- Projeto 1 -->
+          <div class="project-item" style="display: flex; margin-bottom: 20px;">
+            <div class="project-image" style="flex: 1;"> <img src="icons/project1.webp" alt="Fit IA Muscle Project Screenshot" style="max-width: 100%; height: auto;"> </div>
+            <div class="project-content" style="flex: 2; padding-left: 20px;">
+              <h2 style="color: #0fdaf1; font-weight: bold;">Fit IA muscle</h2>
+              <div><a data-translate-key="project1_desc">Software utilizando IA para analisar a execução de exercícios de musculação. O sistema avalia se os movimentos estão sendo realizados corretamente, fornecendo feedback em tempo real para garantir que os praticantes executem os exercícios de maneira adequada, reduzindo o risco de lesões e melhorando a eficiência do treino.</a></div>
+              <div class="project-skills" style="display: flex; flex-wrap: wrap;">
+                <p style="margin-right: 10px; font-weight: bold;">Python</p>
+                <p style="margin-right: 10px; font-weight: bold;">React Native</p>
+                <p style="margin-right: 10px; font-weight: bold;" data-translate-key="skill_image_processing">Processamento de imagens</p>
+                <p style="margin-right: 10px; font-weight: bold;" data-translate-key="skill_pose_estimation">Estimação de pose</p>
+                <p style="margin-right: 10px; font-weight: bold;" data-translate-key="skill_ai">Inteligência artificial</p>
+              </div>
+              <div class="project-links"> <a href="fit.html" target="_blank"> <i class="bi bi-eye"></i> <span data-translate-key="view_project">Ver Projeto</span> </a> </div>
+            </div>
+          </div>
+          <!-- Projeto 2 -->
+          <div class="project-item" style="display: flex; margin-bottom: 20px;">
+            <div class="project-image" style="flex: 1;"> <img src="icons/project2.webp" alt="3D Reconstruction Project Screenshot" style="max-width: 100%; height: auto;"> </div>
+            <div class="project-content" style="flex: 2; padding-left: 20px;">
+              <h2 style="color: #0fdaf1; font-weight: bold;" data-translate-key="project2_title">Reconstrução 3D para ambientes interativos</h2>
+              <div><a data-translate-key="project2_desc">Software que utiliza técnicas de reconstrução 3D para criar ambientes virtuais interativos a partir de dados do mundo real, permitindo experiências imersivas e aplicações em diversas áreas como jogos, simulações e visualização arquitetônica.</a></div>
+              <div class="project-skills" style="display: flex; flex-wrap: wrap;">
+                <p style="margin-right: 10px; font-weight: bold;">Python</p>
+                <p style="margin-right: 10px; font-weight: bold;">C#</p>
+                <p style="margin-right: 10px; font-weight: bold;">Unity</p>
+                <p style="margin-right: 10px; font-weight: bold;" data-translate-key="skill_image_processing">Processamento de imagens</p>
+                <p style="margin-right: 10px; font-weight: bold;" data-translate-key="skill_3d_reconstruction">Reconstrução 3D</p>
+              </div>
+              <div class="project-links"> <a href="RA.html" target="_blank"> <i class="bi bi-eye"></i> <span data-translate-key="view_project">Ver Projeto</span> </a> </div>
+            </div>
+          </div>
+          <!-- Projeto 3 -->
+          <div class="project-item" style="display: flex; margin-bottom: 20px;">
+            <div class="project-image" style="flex: 1;"> <img src="icons/sustentabuid.jpg" alt="SustentaBuild Project Screenshot" style="max-width: 100%; height: auto;"> </div>
+            <div class="project-content" style="flex: 2; padding-left: 20px;">
+              <h2 style="color: #0fdaf1; font-weight: bold;">SustentaBuild</h2>
+              <div><a data-translate-key="project3_desc">Software desenvolvido para calcular o ciclo de vida do carbono incorporado em materiais de construção, desde a sua concepção e extração até a utilização na obra, auxiliando em decisões mais sustentáveis no setor da construção civil.</a></div>
+              <div class="project-skills" style="display: flex; flex-wrap: wrap;">
+                <p style="margin-right: 10px; font-weight: bold;">HTML</p>
+                <p style="margin-right: 10px; font-weight: bold;">JavaScript</p>
+                <p style="margin-right: 10px; font-weight: bold;">CSS</p>
+              </div>
+              <div class="project-links"> <a href="https://sustentabuild.com" target="_blank"> <i class="bi bi-eye"></i> <span data-translate-key="view_project">Ver Projeto</span> </a> </div>
+            </div>
+          </div>
+          <!-- Projeto 4 -->
+          <div class="project-item" style="display: flex; margin-bottom: 20px;">
+            <div class="project-image" style="flex: 1;"> <img src="icons/avaliação fisica.jpg" alt="Physical Assessment Project Screenshot" style="max-width: 100%; height: auto;"> </div>
+            <div class="project-content" style="flex: 2; padding-left: 20px;">
+              <h2 style="color: #0fdaf1; font-weight: bold;" data-translate-key="project4_title">Avaliação fisica</h2>
+              <div><a data-translate-key="project4_desc">Sistema especialista utilizando regras lógicas para analisar a composição física do paciente (baseado em nível de gordura, idade, etc.) e retornar um feedback sobre seu biotipo e recomendações gerais.</a></div>
+              <div class="project-skills" style="display: flex; flex-wrap: wrap;">
+                 <p style="margin-right: 10px; font-weight: bold;">Python</p>
+                 <p style="margin-right: 10px; font-weight: bold;" data-translate-key="skill_expert_system">Sistema Especialista</p>
+              </div>
+              <div class="project-links"> <a href="https://gitlab.com/lr-guimaraes/definicao-biotipo" target="_blank"> <i class="bi bi-eye"></i> <span data-translate-key="view_project">Ver Projeto</span> </a> </div>
+            </div>
+          </div>
+          <!-- Mais Projetos -->
+          <div class="project-item" style="display: flex; margin-bottom: 20px;">
+            <div class="project-content" style="flex: 1; padding-left: 20px;">
+              <h2 style="color: #0fdaf1; font-weight: bold;" data-translate-key="more_projects_title">Mais projetos</h2>
+               <div><a data-translate-key="more_projects_desc">Explore meu GitLab para ver outros projetos e contribuições.</a></div>
+              <div class="project-links"> <a href="https://gitlab.com/lr-guimaraes" target="_blank"> <i class="bi bi-box-arrow-up-right"></i> <span data-translate-key="view_gitlab">Ver GitLab</span> </a> </div>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
+
+    <!-- RESUME LINK -->
+    <section class="resume-link container section js-scroll" id="resume">
+      <div class="section-title">
+        <p data-translate-key="resume_section_title">MEU CURRÍCULO</p>
+        <h1 data-translate-key="resume_section_headline">Veja meu currículo</h1>
+        <div class="title-detail"> <div class="bar"></div> <div class="ball"></div> <div class="ball"></div> <div class="ball"></div> </div>
+      </div>
       <div class="resume-content">
-         <!-- Texto traduzível -->
-        <a href="curriculo.pdf" target="_blank" class="resume-button" style="display: inline-block; padding: 10px 20px; background-color: #0fdaf1; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;"
-           data-lang-pt="Baixar Currículo (PDF)" data-lang-en="Download Resume (PDF)">
-           Baixar Currículo (PDF)
+        <a href="curriculo.pdf" target="_blank" class="resume-button" style="display: inline-block; padding: 10px 20px; background-color: #0fdaf1; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;" data-translate-key="resume_button">
+          Baixar Currículo (PDF)
         </a>
       </div>
     </section>
@@ -329,34 +243,23 @@
     <section class="contact section js-scroll ativo" id="contact">
       <div class="container">
         <div class="section-title">
-           <!-- Texto traduzível -->
-          <p data-lang-pt="Onde você pode me achar..." data-lang-en="Where you can find me...">Onde você pode me achar...</p>
-          <h1 data-lang-pt="Contato" data-lang-en="Contact">Contato</h1>
-          <div class="title-detail">
-            <div class="bar"></div>
-            <div class="ball"></div>
-            <div class="ball"></div>
-            <div class="ball"></div>
-          </div>
+          <p data-translate-key="contact_section_title">Onde você pode me achar...</p>
+          <h1 data-translate-key="contact_section_headline">Contato</h1>
+          <div class="title-detail"> <div class="bar"></div> <div class="ball"></div> <div class="ball"></div> <div class="ball"></div> </div>
         </div>
         <div class="contact-container">
-           <!-- Texto traduzível -->
-          <p data-lang-pt="Aqui pode encontrar os principais meios de entrar em contato comigo."
-             data-lang-en="Here you can find the main ways to get in touch with me.">
-             Aqui pode encontrar os principais meios de entrar em contato comigo.
-          </p>
+          <p data-translate-key="contact_text">Aqui pode encontrar os principais meios de entrar em contato comigo.</p>
           <ul class="contact-list">
-             <!-- Os links em si não precisam de tradução, mas os spans sim -->
             <li>
               <a href="https://www.linkedin.com/in/leandro-ricardo-guimarães-a87b981b4/" target="_blank">
                 <i class="bi bi-linkedin"></i>
-                <span>Leandro Ricardo Guimarães</span> <!-- Nomes próprios geralmente não se traduzem -->
+                <span>Leandro Ricardo Guimarães</span>
               </a>
             </li>
             <li>
               <a href="https://gitlab.com/lr-guimaraes" target="_blank">
-                <i class="bi bi-github"></i> <!-- Usei github icon, ajuste se tiver gitlab icon -->
-                <span>LeandroGuimaraes</span>
+                <i class="bi bi-github"></i>
+                <span>lr-guimaraes</span> <!-- Nome de usuário no GitLab -->
               </a>
             </li>
             <li>
@@ -375,22 +278,15 @@
     <div class="footer container">
       <div>
         <ul class="footer-list">
-           <!-- Ícones não precisam de tradução -->
           <li> <a href="https://www.linkedin.com/in/leandro-ricardo-guimarães-a87b981b4/" target="_blank" aria-label="LinkedIn"> <i class="bi bi-linkedin"></i> </a> </li>
           <li> <a href="https://gitlab.com/lr-guimaraes" target="_blank" aria-label="GitLab"> <i class="bi bi-github"></i> </a> </li>
-          <li> <a href="mailto:leandrorg307@gmail.com" target="_blank" aria-label="Email"> <i class="bi bi-envelope"></i> </a> </li>
+          <li> <a href="mailto:yleandrorg307@gmail.com" target="_blank" aria-label="Email"> <i class="bi bi-envelope"></i></i> </a> </li>
         </ul>
       </div>
-       <!-- Texto traduzível -->
-      <div data-lang-pt="© Todos os direitos reservados a Leandro Guimarães" 
-           data-lang-en="© All rights reserved to Leandro Guimarães">
-           © Todos os direitos reservados a Leandro Guimarães
-      </div>
+      <div data-translate-key="footer_copyright">© Todos os direitos reservados a Leandro Guimarães</div>
     </div>
   </footer>
-
-  <!-- Adicione o script de idioma antes do fechamento do body -->
-  <script src="./js/language.js"></script> 
   <script src="./js/script.js"></script>
 </body>
+
 </html>
