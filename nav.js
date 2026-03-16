@@ -22,11 +22,11 @@
 
     const PAGES = [
         { key: 'index',   href: 'index.html',   labelPT: 'Início',   labelEN: 'Home'    },
-        { key: 'sobre',   href: 'Sobre.html',    labelPT: 'Sobre',    labelEN: 'About'   },
+        { key: 'sobre',   href: 'sobre.html',    labelPT: 'Sobre',    labelEN: 'About'   },
         { key: 'fit',     href: 'fit.html',      labelPT: 'Fit IA',   labelEN: 'Fit IA'  },
         { key: 'ra',      href: 'RA.html',       labelPT: 'Rec. 3D',  labelEN: '3D Rec.' },
         { key: 'hiia',    href: 'HIIA.html',     labelPT: 'HIIA',     labelEN: 'HIIA'    },
-        { key: 'contato', href: 'Contato.html',  labelPT: 'Contato',  labelEN: 'Contact' },
+        { key: 'contato', href: 'contato.html',  labelPT: 'Contato',  labelEN: 'Contact' },
     ];
 
     // ── Detect current page (case-insensitive) ──────────────────────────────
