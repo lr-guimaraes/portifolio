@@ -531,13 +531,7 @@
 <body>
 
 <!-- HEADER -->
-<header class="site-header">
-    <a class="header-logo" href="index.html">← PORTFÓLIO</a>
-    <div class="lang-toggle">
-        <button class="lang-btn active" data-lang="pt-BR" onclick="setLang('pt-BR')">PT</button>
-        <button class="lang-btn" data-lang="en-US" onclick="setLang('en-US')">EN</button>
-    </div>
-</header>
+<header class="site-header"></header>
 
 <!-- HERO -->
 <section class="hero">
@@ -1006,75 +1000,9 @@
 </section>
 
 <!-- FOOTER -->
-<footer>
-    <span>HIIA © 2025–2027 · Leandro Guimarães · PUC-PR</span>
-    <a href="index.html" class="pt-only">← Voltar ao Portfólio</a>
-    <a href="index.html" class="en-only">← Back to Portfolio</a>
-</footer>
+<footer></footer>
 
-<script>
-    function setLang(lang) {
-        document.documentElement.setAttribute('data-lang', lang);
-        document.querySelectorAll('.lang-btn').forEach(b => {
-            b.classList.toggle('active', b.dataset.lang === lang);
-        });
-        try { localStorage.setItem('hiia_lang', lang); } catch(e) {}
-    }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        let saved = 'pt-BR';
-        try { saved = localStorage.getItem('hiia_lang') || 'pt-BR'; } catch(e) {}
-        setLang(saved);
-
-        // Animated waveforms for data placeholders
-        function drawWave(id, amp, freq, speed, color) {
-            const canvas = document.getElementById(id);
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let t = 0;
-
-            function loop() {
-                canvas.width = canvas.offsetWidth;
-                canvas.height = canvas.offsetHeight;
-                const w = canvas.width, h = canvas.height;
-                ctx.clearRect(0, 0, w, h);
-
-                // Grid
-                ctx.strokeStyle = 'rgba(15,218,241,0.06)';
-                ctx.lineWidth = 1;
-                for (let i = 1; i < 4; i++) {
-                    ctx.beginPath();
-                    ctx.moveTo(0, h / 4 * i);
-                    ctx.lineTo(w, h / 4 * i);
-                    ctx.stroke();
-                }
-
-                // Wave
-                ctx.beginPath();
-                ctx.strokeStyle = color;
-                ctx.lineWidth = 1.6;
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = color;
-                for (let x = 0; x < w; x++) {
-                    const n = x / w;
-                    const y = h / 2
-                        + Math.sin(n * freq * Math.PI * 2 + t) * h * amp
-                        + Math.sin(n * freq * 1.8 * Math.PI * 2 + t * 0.7) * h * (amp * 0.3);
-                    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-                }
-                ctx.stroke();
-                ctx.shadowBlur = 0;
-                t += speed;
-                requestAnimationFrame(loop);
-            }
-            loop();
-        }
-
-        drawWave('grfCanvas',  0.2, 3,  0.022, 'rgba(15,218,241,0.6)');
-        drawWave('copCanvas',  0.15, 4, 0.018, 'rgba(15,218,241,0.5)');
-        drawWave('emg1Canvas', 0.22, 9, 0.03,  'rgba(15,218,241,0.65)');
-        drawWave('emg2Canvas', 0.18, 7, 0.026, 'rgba(15,218,241,0.55)');
-    });
-</script>
+<script src="nav.js"></script>
 </body>
 </html>
