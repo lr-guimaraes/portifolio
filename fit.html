@@ -115,13 +115,7 @@
 </head>
 <body>
 
-<header class="site-header">
-    <a class="header-logo" href="index.html">← PORTFÓLIO</a>
-    <div class="lang-toggle">
-        <button class="lang-btn active" data-lang="pt-BR" onclick="setLang('pt-BR')">PT</button>
-        <button class="lang-btn" data-lang="en-US" onclick="setLang('en-US')">EN</button>
-    </div>
-</header>
+<header class="site-header"></header>
 
 <section class="hero">
     <div class="hero-left">
@@ -260,23 +254,9 @@
     </div>
 </section>
 
-<footer>
-    <span>Fit IA Muscle © 2024 · Leandro Guimarães</span>
-    <a href="index.html" class="pt-only">← Voltar ao Portfólio</a>
-    <a href="index.html" class="en-only">← Back to Portfolio</a>
-</footer>
+<footer></footer>
 
-<script>
-    function setLang(lang) {
-        document.documentElement.setAttribute('data-lang', lang);
-        document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-        try { localStorage.setItem('portfolio_lang', lang); } catch(e) {}
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-        let saved = 'pt-BR';
-        try { saved = localStorage.getItem('portfolio_lang') || 'pt-BR'; } catch(e) {}
-        setLang(saved);
-    });
-</script>
+
+<script src="nav.js"></script>
 </body>
 </html>
