@@ -6,7 +6,7 @@
  * Certifique-se que os nomes dos arquivos no repositório
  * correspondem EXATAMENTE aos hrefs abaixo (incluindo maiúsculas).
  *
- * Arquivos esperados na raiz do repositório:
+ * Arquivos esperados na raiz do repositório: 
  *   index.html
  *   sobre.html
  *   contato.html
