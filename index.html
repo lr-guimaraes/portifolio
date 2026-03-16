@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reconstrução 3D</title>
+    <title>Leandro Guimarães • Portfólio</title>
+    <meta name="description" content="Portfólio de Leandro Guimarães — Desenvolvedor Full Stack e Engenheiro de Computação">
+    <link rel="shortcut icon" href="./icons/prog.jpeg" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         :root {
             --cyan: #0fdaf1;
@@ -15,340 +18,494 @@
             --bg3: #1a1a1a;
             --muted: #888;
             --border: rgba(15,218,241,0.18);
+            --text: #e8e8e8;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Syne', sans-serif; background: var(--bg); color: #e8e8e8; overflow-x: hidden; }
+        body { font-family: 'Syne', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        /* HEADER */
+        /* ── HEADER ── */
         .site-header {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
             display: flex; align-items: center; justify-content: space-between;
-            padding: 18px 48px;
-            background: rgba(14,14,14,0.88); backdrop-filter: blur(12px);
+            padding: 0 48px; height: 64px;
+            background: rgba(14,14,14,0.9); backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
         }
-        .header-logo { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--cyan); letter-spacing: 0.1em; text-decoration: none; }
-        .lang-toggle { display: flex; gap: 4px; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 4px; }
-        .lang-btn { font-family: 'Space Mono', monospace; font-size: 11px; padding: 5px 12px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s; background: transparent; color: var(--muted); letter-spacing: 0.08em; }
+        .header-logo a {
+            font-family: 'Space Mono', monospace; font-size: 15px;
+            color: #fff; text-decoration: none; letter-spacing: 0.06em;
+        }
+        .header-logo a span { color: var(--cyan); }
+
+        .header-nav { display: flex; align-items: center; gap: 32px; }
+        .header-nav a {
+            font-family: 'Space Mono', monospace; font-size: 12px;
+            color: var(--muted); text-decoration: none;
+            letter-spacing: 0.08em; transition: color 0.2s;
+        }
+        .header-nav a:hover { color: var(--cyan); }
+
+        .header-right { display: flex; align-items: center; gap: 16px; }
+
+        .lang-toggle { display: flex; gap: 4px; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 3px; }
+        .lang-btn { font-family: 'Space Mono', monospace; font-size: 11px; padding: 4px 10px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s; background: transparent; color: var(--muted); letter-spacing: 0.08em; }
         .lang-btn.active { background: var(--cyan); color: #000; font-weight: 700; }
 
-        /* HERO */
-        .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
-        .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 120px 60px 80px; position: relative; z-index: 2; }
-        .hero-tag { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--cyan); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
-        .hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--cyan); }
-        .hero-title { font-family: 'Syne', sans-serif; font-size: clamp(44px,6vw,80px); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; color: #fff; margin-bottom: 20px; }
-        .hero-title em { color: var(--cyan); font-style: normal; display: block; }
-        .hero-subtitle { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 36px; line-height: 1.9; }
-        .hero-desc { font-size: 16px; color: #aaa; line-height: 1.75; max-width: 460px; margin-bottom: 44px; }
-        .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; }
-        .pill { font-family: 'Space Mono', monospace; font-size: 10px; padding: 5px 12px; border: 1px solid var(--border); border-radius: 100px; color: var(--cyan); letter-spacing: 0.06em; background: var(--cyan-dim); }
-        .hero-right { position: relative; overflow: hidden; }
-        .hero-bg-img {
-            position: absolute; inset: 0;
-            background-image: linear-gradient(to right, rgba(14,14,14,0.97) 0%, rgba(14,14,14,0.55) 45%, rgba(14,14,14,0.1) 100%), url('RA/RA.webp');
-            background-size: cover; background-position: center;
-        }
-        .hero-logo-overlay { position: absolute; bottom: 60px; right: 60px; z-index: 2; }
-        .hero-logo-overlay img { width: 100px; opacity: 0.85; filter: drop-shadow(0 0 16px rgba(15,218,241,0.3)); }
-        .scanlines { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(15,218,241,0.018) 3px, rgba(15,218,241,0.018) 4px); pointer-events: none; z-index: 1; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+        .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-        /* DIVIDER */
+        .mobile-menu {
+            display: none; position: fixed; top: 64px; left: 0; right: 0;
+            background: rgba(14,14,14,0.97); backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border); padding: 24px 48px; z-index: 99;
+            flex-direction: column; gap: 20px;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--muted); text-decoration: none; letter-spacing: 0.1em; }
+        .mobile-menu a:hover { color: var(--cyan); }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; padding: 100px 60px 80px;
+            max-width: 1000px; margin: 0 auto; position: relative;
+        }
+        .hero-greeting {
+            font-family: 'Space Mono', monospace; font-size: 13px;
+            color: var(--cyan); letter-spacing: 0.2em; text-transform: uppercase;
+            margin-bottom: 24px; display: flex; align-items: center; gap: 12px;
+        }
+        .hero-greeting::before { content: ''; display: block; width: 32px; height: 1px; background: var(--cyan); }
+        .hero-name {
+            font-size: clamp(48px, 8vw, 96px); font-weight: 800;
+            line-height: 0.92; letter-spacing: -0.03em; color: #fff;
+            margin-bottom: 16px;
+        }
+        .hero-name em { color: var(--cyan); font-style: normal; display: block; }
+        .hero-role {
+            font-family: 'Space Mono', monospace; font-size: 14px;
+            color: var(--muted); letter-spacing: 0.1em; margin-bottom: 48px;
+        }
+        .hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 64px; }
+        .btn-primary {
+            font-family: 'Space Mono', monospace; font-size: 12px;
+            padding: 12px 28px; background: var(--cyan); color: #000;
+            border: none; border-radius: 6px; cursor: pointer;
+            text-decoration: none; letter-spacing: 0.08em; font-weight: 700;
+            transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.85; }
+        .btn-outline {
+            font-family: 'Space Mono', monospace; font-size: 12px;
+            padding: 11px 28px; background: transparent; color: var(--cyan);
+            border: 1px solid var(--border); border-radius: 6px; cursor: pointer;
+            text-decoration: none; letter-spacing: 0.08em;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .btn-outline:hover { border-color: var(--cyan-mid); background: var(--cyan-dim); }
+        .hero-socials { display: flex; gap: 16px; }
+        .hero-socials a {
+            width: 40px; height: 40px; border-radius: 8px;
+            border: 1px solid var(--border); background: var(--bg2);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--muted); font-size: 18px; text-decoration: none;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .hero-socials a:hover { border-color: var(--cyan-mid); color: var(--cyan); }
+
+        /* Cursor blink */
+        .cursor { display: inline-block; width: 3px; height: 0.85em; background: var(--cyan); margin-left: 4px; vertical-align: text-bottom; animation: blink 1s step-end infinite; }
+        @keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
+
+        /* ── DIVIDER ── */
         .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent); margin: 0 60px; }
 
-        /* SECTION */
-        .section { padding: 90px 60px; max-width: 1280px; margin: 0 auto; }
+        /* ── SECTION ── */
+        .section { padding: 100px 60px; max-width: 1280px; margin: 0 auto; }
         .section-label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.25em; color: var(--cyan); text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
         .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--cyan); }
-        .section-title { font-size: clamp(26px,3.5vw,42px); font-weight: 800; color: #fff; margin-bottom: 14px; line-height: 1.1; }
+        .section-title { font-size: clamp(28px,3.5vw,44px); font-weight: 800; color: #fff; margin-bottom: 14px; line-height: 1.1; }
         .section-title em { color: var(--cyan); font-style: normal; }
-        .section-desc { font-size: 15px; color: #777; line-height: 1.8; max-width: 660px; margin-bottom: 48px; }
+        .section-desc { font-size: 15px; color: #777; line-height: 1.8; max-width: 660px; margin-bottom: 52px; }
 
-        /* STATS */
-        .stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-        .stat-cell { background: var(--bg2); padding: 28px 20px; text-align: center; }
-        .stat-number { font-family: 'Space Mono', monospace; font-size: 22px; font-weight: 700; color: var(--cyan); display: block; margin-bottom: 8px; }
-        .stat-label { font-size: 12px; color: var(--muted); line-height: 1.5; }
+        /* ── ABOUT SPLIT ── */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .about-text p { font-size: 15px; color: #888; line-height: 1.85; margin-bottom: 16px; }
+        .about-text p:last-child { margin-bottom: 0; }
+        .about-text strong { color: var(--cyan); font-weight: 600; }
 
-        /* METHOD CARDS */
-        .method-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
-        .method-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 28px 24px; transition: border-color 0.3s; }
-        .method-card:hover { border-color: var(--cyan-mid); }
-        .method-icon { width: 40px; height: 40px; border-radius: 8px; background: var(--cyan-dim); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; color: var(--cyan); }
-        .method-title { font-size: 15px; font-weight: 700; color: #ddd; margin-bottom: 9px; }
-        .method-text { font-size: 13px; color: #5a5a5a; line-height: 1.65; }
+        .skills-cloud { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-tag {
+            font-family: 'Space Mono', monospace; font-size: 11px;
+            padding: 6px 14px; border: 1px solid var(--border);
+            border-radius: 6px; color: #aaa; background: var(--bg2);
+            letter-spacing: 0.04em; transition: border-color 0.2s, color 0.2s;
+        }
+        .skill-tag:hover { border-color: var(--cyan-mid); color: var(--cyan); }
+        .skill-tag.highlight { border-color: var(--border); color: var(--cyan); background: var(--cyan-dim); }
 
-        /* PHOTO GRID */
-        .photo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 56px; }
-        .photo-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
-        .photo-card:hover { border-color: var(--cyan-mid); transform: translateY(-4px); }
-        .photo-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; border-bottom: 1px solid var(--border); }
-        .photo-card-body { padding: 14px 18px; }
-        .photo-card-label { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
+        /* ── PROJECTS ── */
+        .project-list { display: flex; flex-direction: column; gap: 2px; }
+        .project-row {
+            display: grid; grid-template-columns: 80px 1fr auto;
+            align-items: center; gap: 28px;
+            padding: 28px 32px;
+            background: var(--bg2); border: 1px solid var(--border);
+            border-radius: 12px; margin-bottom: 10px;
+            transition: border-color 0.3s, transform 0.3s;
+            text-decoration: none; color: inherit;
+        }
+        .project-row:hover { border-color: var(--cyan-mid); transform: translateX(6px); }
+        .project-row-img { width: 80px; height: 60px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); }
+        .project-row-img-placeholder { width: 80px; height: 60px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg3); display: flex; align-items: center; justify-content: center; }
+        .project-row-body {}
+        .project-row-title { font-size: 16px; font-weight: 700; color: #ddd; margin-bottom: 6px; }
+        .project-row-desc { font-size: 13px; color: #666; line-height: 1.55; margin-bottom: 12px; }
+        .project-row-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag { font-family: 'Space Mono', monospace; font-size: 10px; padding: 3px 10px; border: 1px solid var(--border); border-radius: 100px; color: var(--cyan); background: var(--cyan-dim); letter-spacing: 0.04em; }
+        .project-row-arrow { color: var(--muted); font-size: 20px; transition: color 0.2s; }
+        .project-row:hover .project-row-arrow { color: var(--cyan); }
 
-        /* GALLERY GROUP */
-        .gallery-group { margin-bottom: 60px; }
-        .gallery-group-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        .gallery-group-title::before { content: ''; display: block; width: 16px; height: 2px; background: var(--cyan); border-radius: 2px; }
+        /* ── RESUME ── */
+        .resume-box {
+            background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
+            padding: 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px;
+        }
+        .resume-box-left {}
+        .resume-box-title { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+        .resume-box-desc { font-size: 14px; color: #666; line-height: 1.65; max-width: 480px; }
 
-        /* FOOTER */
+        /* ── CONTACT STRIP ── */
+        .contact-strip { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        .contact-card {
+            background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+            padding: 28px 24px; display: flex; align-items: center; gap: 16px;
+            text-decoration: none; color: inherit;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .contact-card:hover { border-color: var(--cyan-mid); transform: translateY(-4px); }
+        .contact-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--cyan-dim); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--cyan); flex-shrink: 0; }
+        .contact-card-label { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+        .contact-card-value { font-size: 14px; font-weight: 600; color: #ddd; }
+
+        /* ── FOOTER ── */
         footer { border-top: 1px solid var(--border); padding: 28px 60px; display: flex; align-items: center; justify-content: space-between; }
         footer span, footer a { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.06em; }
         footer span { color: var(--muted); }
         footer a { color: var(--cyan); text-decoration: none; }
 
+        /* ── LIVE DOT ── */
         @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.8)} }
         .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); display: inline-block; animation: pulse-dot 1.6s ease-in-out infinite; }
 
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .about-grid { grid-template-columns: 1fr; gap: 48px; }
+        }
         @media (max-width: 900px) {
-            .hero { grid-template-columns: 1fr; }
-            .hero-right { height: 260px; }
-            .hero-left { padding: 110px 24px 60px; }
+            .site-header { padding: 0 24px; }
+            .header-nav { display: none; }
+            .hamburger { display: flex; }
+            .hero { padding: 100px 24px 60px; }
             .section { padding: 60px 24px; }
-            .stats-row { grid-template-columns: repeat(2,1fr); }
-            .method-grid { grid-template-columns: 1fr; }
-            .photo-grid { grid-template-columns: 1fr 1fr; }
             .divider { margin: 0 24px; }
+            .project-row { grid-template-columns: 1fr auto; }
+            .project-row-img, .project-row-img-placeholder { display: none; }
+            .contact-strip { grid-template-columns: 1fr; }
+            .resume-box { flex-direction: column; align-items: flex-start; }
             footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
-            .site-header { padding: 14px 24px; }
         }
-        @media (max-width: 560px) {
-            .photo-grid { grid-template-columns: 1fr; }
-        }
+
+        /* Language */
         html[data-lang="pt-BR"] .en-only { display: none !important; }
         html[data-lang="en-US"] .pt-only { display: none !important; }
     </style>
 </head>
 <body>
 
-<header class="site-header">
-    <a class="header-logo" href="index.html">← PORTFÓLIO</a>
-    <div class="lang-toggle">
-        <button class="lang-btn active" data-lang="pt-BR" onclick="setLang('pt-BR')">PT</button>
-        <button class="lang-btn" data-lang="en-US" onclick="setLang('en-US')">EN</button>
-    </div>
-</header>
+<!-- HEADER -->
+<header class="site-header"></header>
 
-<section class="hero">
-    <div class="hero-left">
-        <div class="hero-tag">
+<main>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-greeting">
             <span class="live-dot"></span>
-            <span class="pt-only">Pesquisa CNPq &middot; 2021–2022</span>
-            <span class="en-only">CNPq Research &middot; 2021–2022</span>
+            <span class="pt-only">Olá, visitante 👋</span>
+            <span class="en-only">Hello, visitor 👋</span>
         </div>
-        <h1 class="hero-title">
-            Reconstrução
-            <em>3D</em>
+        <h1 class="hero-name">
+            Leandro
+            <em>Guimarães<span class="cursor"></span></em>
         </h1>
-        <p class="hero-subtitle pt-only">Ambientes Virtuais com Nuvem de Pontos ToF<br>Python · Unity · Câmera Time-of-Flight</p>
-        <p class="hero-subtitle en-only">Virtual Environments with ToF Point Cloud<br>Python · Unity · Time-of-Flight Camera</p>
-        <p class="hero-desc pt-only">Protótipo de sistema computacional para reconstrução 3D de objetos baseada em nuvens de pontos ToF, aplicado em ambiente virtual imersivo de realidade mista para treinamento de trabalhadores de chão de fábrica.</p>
-        <p class="hero-desc en-only">Computational system prototype for 3D object reconstruction based on ToF point clouds, applied in an immersive mixed reality virtual environment for factory floor worker training.</p>
-        <div class="hero-pills">
-            <span class="pill">Python</span>
-            <span class="pill">Unity</span>
-            <span class="pill">ToF Camera</span>
-            <span class="pill pt-only">Nuvem de Pontos</span>
-            <span class="pill en-only">Point Cloud</span>
-            <span class="pill pt-only">Realidade Mista</span>
-            <span class="pill en-only">Mixed Reality</span>
-            <span class="pill">CNPq</span>
+        <p class="hero-role pt-only">Full Stack Developer &amp; Computer Engineer</p>
+        <p class="hero-role en-only">Full Stack Developer &amp; Computer Engineer</p>
+        <div class="hero-actions">
+            <a href="#projects" class="btn-primary pt-only">Ver Projetos</a>
+            <a href="#projects" class="btn-primary en-only">View Projects</a>
+            <a href="#contact" class="btn-outline pt-only">Entrar em Contato</a>
+            <a href="#contact" class="btn-outline en-only">Get in Touch</a>
         </div>
-    </div>
-    <div class="hero-right">
-        <div class="hero-bg-img"></div>
-        <div class="scanlines"></div>
-        <div class="hero-logo-overlay">
-            <img src="icons/project2.webp" alt="Reconstrução 3D Logo">
+        <div class="hero-socials">
+            <a href="https://www.linkedin.com/in/leandrorguimaraes" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="https://gitlab.com/lr-guimaraes" target="_blank" aria-label="GitLab"><i class="bi bi-gitlab"></i></a>
+            <a href="/cdn-cgi/l/email-protection#402c25212e24322f322773707700272d21292c6e232f2d" aria-label="Email"><i class="bi bi-envelope"></i></a>
         </div>
-    </div>
-</section>
+    </section>
 
-<div class="divider"></div>
+    <div class="divider"></div>
 
-<div class="section" style="padding-top:60px;padding-bottom:60px;">
-    <div class="stats-row">
-        <div class="stat-cell">
-            <span class="stat-number">ToF</span>
-            <span class="stat-label pt-only">Câmera<br>Time-of-Flight</span>
-            <span class="stat-label en-only">Time-of-Flight<br>Camera</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">3D</span>
-            <span class="stat-label pt-only">Reconstrução<br>Tridimensional</span>
-            <span class="stat-label en-only">3D<br>Reconstruction</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">RM</span>
-            <span class="stat-label pt-only">Realidade<br>Mista</span>
-            <span class="stat-label en-only">Mixed<br>Reality</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">CNPq</span>
-            <span class="stat-label pt-only">Pesquisa<br>Acadêmica</span>
-            <span class="stat-label en-only">Academic<br>Research</span>
-        </div>
-    </div>
-</div>
+    <!-- ABOUT -->
+    <section class="section" id="about">
+        <div class="section-label pt-only">Sobre Mim</div>
+        <div class="section-label en-only">About Me</div>
+        <h2 class="section-title pt-only">Conheça mais<br><em>sobre mim</em></h2>
+        <h2 class="section-title en-only">Learn more<br><em>about me</em></h2>
 
-<div class="divider"></div>
+        <div class="about-grid">
+            <div class="about-text">
+                <p class="pt-only">Olá! Sou <strong>Leandro Guimarães</strong>, Engenheiro de Computação formado pela PUC-PR (2019–2024), atualmente cursando <strong>Mestrado em Tecnologia em Saúde</strong> (2025–2027), onde desenvolvo o projeto HIIA de detecção de fadiga em idosos.</p>
+                <p class="en-only">Hello! I'm <strong>Leandro Guimarães</strong>, a Computer Engineer graduated from PUC-PR (2019–2024), currently pursuing a <strong>Master's in Health Technology</strong> (2025–2027), where I develop the HIIA project for fatigue detection in elderly individuals.</p>
 
-<section class="section">
-    <div class="section-label pt-only">Sobre o Projeto</div>
-    <div class="section-label en-only">About the Project</div>
-    <h2 class="section-title pt-only">Reconstrução <em>3D</em><br>para Ambientes Interativos</h2>
-    <h2 class="section-title en-only"><em>3D Reconstruction</em><br>for Interactive Environments</h2>
-    <p class="section-desc pt-only">O projeto desenvolve um protótipo que utiliza câmera Time-of-Flight para capturar nuvens de pontos de objetos reais e reconstruí-los em ambientes virtuais de realidade mista, viabilizando treinamentos imersivos para trabalhadores industriais.</p>
-    <p class="section-desc en-only">The project develops a prototype that uses a Time-of-Flight camera to capture point clouds of real objects and reconstruct them in mixed reality virtual environments, enabling immersive training for industrial workers.</p>
+                <p class="pt-only">Trabalho como <strong>Desenvolvedor Full Stack</strong> na Kie Tec / Datakie, atuando com sistemas embarcados, IA para reconhecimento facial e de objetos, realidade aumentada, Node.js, React e PL/SQL. Também fui pesquisador CNPq em reconstrução 3D e estagiário na Siemens.</p>
+                <p class="en-only">I work as a <strong>Full Stack Developer</strong> at Kie Tec / Datakie, working with embedded systems, AI for facial and object recognition, augmented reality, Node.js, React, and PL/SQL. I was also a CNPq researcher in 3D reconstruction and an intern at Siemens.</p>
 
-    <div class="method-grid">
-        <div class="method-card">
-            <div class="method-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                <p class="pt-only">Tenho perfil colaborativo, gosto de trabalhar em equipe e busco constantemente novos desafios que unam tecnologia e impacto real.</p>
+                <p class="en-only">I have a collaborative profile, enjoy teamwork, and constantly seek new challenges that unite technology with real-world impact.</p>
+
+                <br>
+                <a href="#contact" class="btn-outline pt-only" style="display:inline-block;">Entre em contato</a>
+                <a href="#contact" class="btn-outline en-only" style="display:inline-block;">Get in touch</a>
             </div>
-            <div class="method-title pt-only">Câmera ToF</div>
-            <div class="method-title en-only">ToF Camera</div>
-            <p class="method-text pt-only">Captura de profundidade em tempo real com câmera Time-of-Flight, gerando nuvens de pontos densas e precisas de objetos e ambientes físicos.</p>
-            <p class="method-text en-only">Real-time depth capture with a Time-of-Flight camera, generating dense and accurate point clouds of physical objects and environments.</p>
-        </div>
-        <div class="method-card">
-            <div class="method-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 6 6m0-6-6 6"/></svg>
-            </div>
-            <div class="method-title pt-only">Reconstrução 3D</div>
-            <div class="method-title en-only">3D Reconstruction</div>
-            <p class="method-text pt-only">Processamento e reconstrução de malhas 3D a partir das nuvens de pontos capturadas, utilizando algoritmos de reconstrução de superfície em Python.</p>
-            <p class="method-text en-only">Processing and reconstruction of 3D meshes from captured point clouds, using surface reconstruction algorithms in Python.</p>
-        </div>
-        <div class="method-card">
-            <div class="method-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-            </div>
-            <div class="method-title pt-only">Realidade Mista</div>
-            <div class="method-title en-only">Mixed Reality</div>
-            <p class="method-text pt-only">Integração dos modelos 3D em ambiente virtual imersivo Unity para simulação de montagem de equipamentos industriais em realidade mista.</p>
-            <p class="method-text en-only">Integration of 3D models into an immersive Unity virtual environment for industrial equipment assembly simulation in mixed reality.</p>
-        </div>
-    </div>
-</section>
 
-<div class="divider"></div>
-
-<!-- GALLERY -->
-<section class="section">
-    <div class="section-label pt-only">Galeria</div>
-    <div class="section-label en-only">Gallery</div>
-    <h2 class="section-title pt-only"><em>Imagens</em> do Projeto</h2>
-    <h2 class="section-title en-only">Project <em>Images</em></h2>
-    <p class="section-desc pt-only">Etapas do desenvolvimento — da construção do sistema de captura até a renderização final e modelo físico do MVP.</p>
-    <p class="section-desc en-only">Development stages — from building the capture system to the final rendering and physical MVP model.</p>
-
-    <!-- Construção -->
-    <div class="gallery-group">
-        <div class="gallery-group-title pt-only">Construção</div>
-        <div class="gallery-group-title en-only">Construction</div>
-        <div class="photo-grid">
-            <div class="photo-card">
-                <img src="RA/1.png" alt="Construção 1">
-                <div class="photo-card-body">
-                    <span class="photo-card-label pt-only">Montagem do Sistema</span>
-                    <span class="photo-card-label en-only">System Assembly</span>
-                </div>
-            </div>
-            <div class="photo-card">
-                <img src="RA/2.png" alt="Construção 2">
-                <div class="photo-card-body">
-                    <span class="photo-card-label pt-only">Câmera ToF</span>
-                    <span class="photo-card-label en-only">ToF Camera</span>
-                </div>
-            </div>
-            <div class="photo-card">
-                <img src="RA/3.png" alt="Construção 3">
-                <div class="photo-card-body">
-                    <span class="photo-card-label pt-only">Captura de Nuvem de Pontos</span>
-                    <span class="photo-card-label en-only">Point Cloud Capture</span>
+            <div>
+                <p style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.15em;color:var(--cyan);text-transform:uppercase;margin-bottom:20px;" class="pt-only">Habilidades Técnicas</p>
+                <p style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.15em;color:var(--cyan);text-transform:uppercase;margin-bottom:20px;" class="en-only">Technical Skills</p>
+                <div class="skills-cloud">
+                    <span class="skill-tag highlight">Python</span>
+                    <span class="skill-tag highlight">Node.js</span>
+                    <span class="skill-tag highlight">React</span>
+                    <span class="skill-tag">PL/SQL</span>
+                    <span class="skill-tag">C / C++</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag highlight">Git</span>
+                    <span class="skill-tag">Unity</span>
+                    <span class="skill-tag">UiPath</span>
+                    <span class="skill-tag">Tableau</span>
+                    <span class="skill-tag">Google Cloud</span>
+                    <span class="skill-tag">Linux</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag highlight pt-only">Inteligência Artificial</span>
+                    <span class="skill-tag highlight en-only">Artificial Intelligence</span>
+                    <span class="skill-tag pt-only">Realidade Aumentada</span>
+                    <span class="skill-tag en-only">Augmented Reality</span>
+                    <span class="skill-tag pt-only">Sistemas Embarcados</span>
+                    <span class="skill-tag en-only">Embedded Systems</span>
+                    <span class="skill-tag pt-only">Processamento de Imagens</span>
+                    <span class="skill-tag en-only">Image Processing</span>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Renderização -->
-    <div class="gallery-group">
-        <div class="gallery-group-title pt-only">Renderização</div>
-        <div class="gallery-group-title en-only">Rendering</div>
-        <div class="photo-grid">
-            <div class="photo-card">
-                <img src="RA/5.png" alt="Renderização 1">
-                <div class="photo-card-body">
-                    <span class="photo-card-label pt-only">Reconstrução 3D — Vista 1</span>
-                    <span class="photo-card-label en-only">3D Reconstruction — View 1</span>
+    <div class="divider"></div>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+        <div class="section-label pt-only">Meus Trabalhos</div>
+        <div class="section-label en-only">My Work</div>
+        <h2 class="section-title pt-only"><em>Projetos</em></h2>
+        <h2 class="section-title en-only"><em>Projects</em></h2>
+        <p class="section-desc pt-only">Soluções desenvolvidas explorando IA, visão computacional, realidade aumentada e desenvolvimento full stack.</p>
+        <p class="section-desc en-only">Solutions built exploring AI, computer vision, augmented reality, and full stack development.</p>
+
+        <div class="project-list">
+            <!-- Fit IA Muscle -->
+            <a class="project-row" href="fit.html">
+                <img class="project-row-img" src="icons/project1.webp" alt="Fit IA Muscle">
+                <div class="project-row-body">
+                    <div class="project-row-title">Fit IA Muscle</div>
+                    <div class="project-row-desc pt-only">Software com IA para analisar a execução de exercícios de musculação em tempo real, fornecendo feedback para prevenir lesões.</div>
+                    <div class="project-row-desc en-only">AI software to analyze weightlifting exercise execution in real time, providing feedback to prevent injuries.</div>
+                    <div class="project-row-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag pt-only">Estimação de Pose</span>
+                        <span class="tag en-only">Pose Estimation</span>
+                        <span class="tag">LSTM</span>
+                    </div>
                 </div>
-            </div>
-            <div class="photo-card">
-                <img src="RA/6.png" alt="Renderização 2">
-                <div class="photo-card-body">
-                    <span class="photo-card-label pt-only">Reconstrução 3D — Vista 2</span>
-                    <span class="photo-card-label en-only">3D Reconstruction — View 2</span>
+                <i class="bi bi-arrow-right project-row-arrow"></i>
+            </a>
+
+            <!-- Reconstrução 3D -->
+            <a class="project-row" href="RA.html">
+                <img class="project-row-img" src="icons/project2.webp" alt="Reconstrução 3D">
+                <div class="project-row-body">
+                    <div class="project-row-title pt-only">Reconstrução 3D para Ambientes Interativos</div>
+                    <div class="project-row-title en-only">3D Reconstruction for Interactive Environments</div>
+                    <div class="project-row-desc pt-only">Protótipo de reconstrução 3D com câmera ToF aplicado em realidade mista para treinamento industrial. Pesquisa CNPq.</div>
+                    <div class="project-row-desc en-only">3D reconstruction prototype with ToF camera applied in mixed reality for industrial training. CNPq Research.</div>
+                    <div class="project-row-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Unity</span>
+                        <span class="tag">ToF Camera</span>
+                        <span class="tag">CNPq</span>
+                    </div>
                 </div>
-            </div>
-            <div class="photo-card">
-                <img src="RA/7.png" alt="Renderização 3">
-                <div class="photo-card-body">
-                    <span class="photo-card-label pt-only">Ambiente Virtual Unity</span>
-                    <span class="photo-card-label en-only">Unity Virtual Environment</span>
+                <i class="bi bi-arrow-right project-row-arrow"></i>
+            </a>
+
+            <!-- HIIA -->
+            <a class="project-row" href="HIIA.html">
+                <div class="project-row-img-placeholder">
+                    <i class="bi bi-activity" style="font-size:24px;color:var(--cyan);opacity:0.6;"></i>
                 </div>
-            </div>
+                <div class="project-row-body">
+                    <div class="project-row-title">HIIA — <span class="pt-only">Detecção de Fadiga em Idosos</span><span class="en-only">Elderly Fatigue Detection</span></div>
+                    <div class="project-row-desc pt-only">Projeto de mestrado: sistema multimodal com IA integrando Vicon, sEMG e plataforma de força para detecção de fadiga muscular. PUC-PR 2025–2027.</div>
+                    <div class="project-row-desc en-only">Master's project: multimodal AI system integrating Vicon, sEMG, and force platform for muscle fatigue detection. PUC-PR 2025–2027.</div>
+                    <div class="project-row-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Vicon</span>
+                        <span class="tag">sEMG</span>
+                        <span class="tag">LSTM</span>
+                        <span class="tag pt-only">Mestrado</span>
+                        <span class="tag en-only">Master's</span>
+                    </div>
+                </div>
+                <i class="bi bi-arrow-right project-row-arrow"></i>
+            </a>
+
+            <!-- SustentaBuild -->
+            <a class="project-row" href="https://sustentabuild.com" target="_blank">
+                <img class="project-row-img" src="icons/sustentabuid.jpg" alt="SustentaBuild" onerror="this.style.display='none'">
+                <div class="project-row-body">
+                    <div class="project-row-title">SustentaBuild</div>
+                    <div class="project-row-desc pt-only">Calculadora do ciclo de vida do carbono incorporado em materiais de construção, auxiliando decisões sustentáveis na construção civil.</div>
+                    <div class="project-row-desc en-only">Embodied carbon lifecycle calculator for building materials, aiding sustainable decision-making in construction.</div>
+                    <div class="project-row-tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">CSS</span>
+                    </div>
+                </div>
+                <i class="bi bi-arrow-right project-row-arrow"></i>
+            </a>
+
+            <!-- Avaliação Física -->
+            <a class="project-row" href="https://gitlab.com/lr-guimaraes/definicao-biotipo" target="_blank">
+                <img class="project-row-img" src="icons/avaliação fisica.jpg" alt="Avaliação Física" onerror="this.style.display='none'">
+                <div class="project-row-body">
+                    <div class="project-row-title pt-only">Avaliação Física</div>
+                    <div class="project-row-title en-only">Physical Assessment</div>
+                    <div class="project-row-desc pt-only">Sistema especialista com regras lógicas para analisar composição física e retornar feedback de biotipo e recomendações gerais.</div>
+                    <div class="project-row-desc en-only">Expert system with logical rules to analyze physical composition and return body type feedback and general recommendations.</div>
+                    <div class="project-row-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag pt-only">Sistema Especialista</span>
+                        <span class="tag en-only">Expert System</span>
+                    </div>
+                </div>
+                <i class="bi bi-arrow-right project-row-arrow"></i>
+            </a>
+
+            <!-- GitLab -->
+            <a class="project-row" href="https://gitlab.com/lr-guimaraes" target="_blank" style="border-style:dashed;">
+                <div class="project-row-img-placeholder">
+                    <i class="bi bi-gitlab" style="font-size:28px;color:var(--cyan);opacity:0.5;"></i>
+                </div>
+                <div class="project-row-body">
+                    <div class="project-row-title pt-only">Mais Projetos — GitLab</div>
+                    <div class="project-row-title en-only">More Projects — GitLab</div>
+                    <div class="project-row-desc pt-only">Explore meu GitLab para ver outros projetos, contribuições e experimentos.</div>
+                    <div class="project-row-desc en-only">Explore my GitLab to see other projects, contributions, and experiments.</div>
+                    <div class="project-row-tags"><span class="tag">gitlab.com/lr-guimaraes</span></div>
+                </div>
+                <i class="bi bi-box-arrow-up-right project-row-arrow"></i>
+            </a>
         </div>
-    </div>
+    </section>
 
-    <!-- MVP -->
-    <div class="gallery-group">
-        <div class="gallery-group-title pt-only">MVP e Modelo Físico</div>
-        <div class="gallery-group-title en-only">MVP & Physical Model</div>
-        <div class="photo-grid">
-            <div class="photo-card">
-                <img src="RA/10.png" alt="MVP 1">
-                <div class="photo-card-body">
-                    <span class="photo-card-label pt-only">Protótipo Final</span>
-                    <span class="photo-card-label en-only">Final Prototype</span>
-                </div>
+    <div class="divider"></div>
+
+    <!-- RESUME -->
+    <section class="section" id="resume">
+        <div class="section-label pt-only">Currículo</div>
+        <div class="section-label en-only">Resume</div>
+        <div class="resume-box">
+            <div class="resume-box-left">
+                <div class="resume-box-title pt-only">Veja meu Currículo</div>
+                <div class="resume-box-title en-only">View my Resume</div>
+                <p class="resume-box-desc pt-only">Acesse o PDF completo com minha experiência profissional, formação acadêmica, habilidades técnicas e projetos desenvolvidos.</p>
+                <p class="resume-box-desc en-only">Access the full PDF with my professional experience, academic background, technical skills, and developed projects.</p>
             </div>
-            <div class="photo-card">
-                <img src="RA/11.png" alt="MVP 2">
-                <div class="photo-card-body">
-                    <span class="photo-card-label pt-only">Realidade Mista — Demo</span>
-                    <span class="photo-card-label en-only">Mixed Reality — Demo</span>
-                </div>
-            </div>
-            <div class="photo-card">
-                <img src="RA/12.png" alt="Modelo Físico">
-                <div class="photo-card-body">
-                    <span class="photo-card-label pt-only">Modelo Físico</span>
-                    <span class="photo-card-label en-only">Physical Model</span>
-                </div>
-            </div>
+            <a href="cv pt.pdf" target="_blank" class="btn-primary pt-only resume-btn" id="resume-btn">Baixar Currículo (PDF)</a>
+            <a href="cv en.pdf" target="_blank" class="btn-primary en-only">Download Resume (PDF)</a>
         </div>
-    </div>
-</section>
+    </section>
 
-<footer>
-    <span>Reconstrução 3D © 2021–2022 · Leandro Guimarães · CNPq</span>
-    <a href="index.html" class="pt-only">← Voltar ao Portfólio</a>
-    <a href="index.html" class="en-only">← Back to Portfolio</a>
-</footer>
+    <div class="divider"></div>
 
-<script>
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+        <div class="section-label pt-only">Onde me encontrar</div>
+        <div class="section-label en-only">Where to find me</div>
+        <h2 class="section-title pt-only"><em>Contato</em></h2>
+        <h2 class="section-title en-only"><em>Contact</em></h2>
+        <p class="section-desc pt-only">Fique à vontade para entrar em contato pelos canais abaixo.</p>
+        <p class="section-desc en-only">Feel free to reach out through any of the channels below.</p>
+
+        <div class="contact-strip">
+            <a class="contact-card" href="https://www.linkedin.com/in/leandrorguimaraes" target="_blank">
+                <div class="contact-icon"><i class="bi bi-linkedin"></i></div>
+                <div>
+                    <div class="contact-card-label">LinkedIn</div>
+                    <div class="contact-card-value">Leandro R. Guimarães</div>
+                </div>
+            </a>
+            <a class="contact-card" href="https://gitlab.com/lr-guimaraes" target="_blank">
+                <div class="contact-icon"><i class="bi bi-gitlab"></i></div>
+                <div>
+                    <div class="contact-card-label">GitLab</div>
+                    <div class="contact-card-value">lr-guimaraes</div>
+                </div>
+            </a>
+            <a class="contact-card" href="/cdn-cgi/l/email-protection#38545d59565c4a574a5f0b080f785f55595154165b5755">
+                <div class="contact-icon"><i class="bi bi-envelope"></i></div>
+                <div>
+                    <div class="contact-card-label">Email</div>
+                    <div class="contact-card-value"><span class="__cf_email__" data-cfemail="701c15111e14021f021743404730171d11191c5e131f1d">[email&#160;protected]</span></div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<footer></footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     function setLang(lang) {
         document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.setAttribute('lang', lang);
         document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
         try { localStorage.setItem('portfolio_lang', lang); } catch(e) {}
     }
-    document.addEventListener('DOMContentLoaded', () => {
-        let saved = 'pt-BR';
-        try { saved = localStorage.getItem('portfolio_lang') || 'pt-BR'; } catch(e) {}
-        setLang(saved);
-    });
+    function toggleMenu() {
+        document.getElementById('hamburger').classList.toggle('open');
+        document.getElementById('mobile-menu').classList.toggle('open');
+    }
+    function closeMenu() {
+        document.getElementById('hamburger').classList.remove('open');
+        document.-e 
 </script>
+<script src="nav.js"></script>
 </body>
 </html>
