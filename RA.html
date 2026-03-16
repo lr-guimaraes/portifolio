@@ -1,180 +1,354 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css"> <!-- Inclua seu arquivo CSS aqui -->
-    <title>Projeto 3D</title>
+    <title>Reconstrução 3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #fff;
-            margin: 0;
-            padding: 0;
+        :root {
+            --cyan: #0fdaf1;
+            --cyan-dim: rgba(15,218,241,0.12);
+            --cyan-mid: rgba(15,218,241,0.4);
+            --bg: #0e0e0e;
+            --bg2: #141414;
+            --bg3: #1a1a1a;
+            --muted: #888;
+            --border: rgba(15,218,241,0.18);
         }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Syne', sans-serif; background: var(--bg); color: #e8e8e8; overflow-x: hidden; }
 
-        /* Estilo de fundo com imagem e degradê da esquerda para a direita */
-        .background {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 1)), url('RA/RA.webp');
-            background-size: cover;
-            background-position: center;
-            height: 70vh; /* Reduzindo a altura da imagem de fundo */
-            position: relative;
+        /* HEADER */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 18px 48px;
+            background: rgba(14,14,14,0.88); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
         }
+        .header-logo { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--cyan); letter-spacing: 0.1em; text-decoration: none; }
+        .lang-toggle { display: flex; gap: 4px; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 4px; }
+        .lang-btn { font-family: 'Space Mono', monospace; font-size: 11px; padding: 5px 12px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s; background: transparent; color: var(--muted); letter-spacing: 0.08em; }
+        .lang-btn.active { background: var(--cyan); color: #000; font-weight: 700; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 2;
+        /* HERO */
+        .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+        .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 120px 60px 80px; position: relative; z-index: 2; }
+        .hero-tag { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--cyan); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+        .hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--cyan); }
+        .hero-title { font-family: 'Syne', sans-serif; font-size: clamp(44px,6vw,80px); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; color: #fff; margin-bottom: 20px; }
+        .hero-title em { color: var(--cyan); font-style: normal; display: block; }
+        .hero-subtitle { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 36px; line-height: 1.9; }
+        .hero-desc { font-size: 16px; color: #aaa; line-height: 1.75; max-width: 460px; margin-bottom: 44px; }
+        .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+        .pill { font-family: 'Space Mono', monospace; font-size: 10px; padding: 5px 12px; border: 1px solid var(--border); border-radius: 100px; color: var(--cyan); letter-spacing: 0.06em; background: var(--cyan-dim); }
+        .hero-right { position: relative; overflow: hidden; }
+        .hero-bg-img {
+            position: absolute; inset: 0;
+            background-image: linear-gradient(to right, rgba(14,14,14,0.97) 0%, rgba(14,14,14,0.55) 45%, rgba(14,14,14,0.1) 100%), url('RA/RA.webp');
+            background-size: cover; background-position: center;
         }
+        .hero-logo-overlay { position: absolute; bottom: 60px; right: 60px; z-index: 2; }
+        .hero-logo-overlay img { width: 100px; opacity: 0.85; filter: drop-shadow(0 0 16px rgba(15,218,241,0.3)); }
+        .scanlines { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(15,218,241,0.018) 3px, rgba(15,218,241,0.018) 4px); pointer-events: none; z-index: 1; }
 
-        .project-header {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 20px;
-            position: relative;
-        }
+        /* DIVIDER */
+        .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent); margin: 0 60px; }
 
-        /* Ajustando o tamanho do logo */
-        .project-logo {
-            position: relative;
-            margin-right: 20px; /* Espaço entre o logo e o título */
-        }
+        /* SECTION */
+        .section { padding: 90px 60px; max-width: 1280px; margin: 0 auto; }
+        .section-label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.25em; color: var(--cyan); text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+        .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--cyan); }
+        .section-title { font-size: clamp(26px,3.5vw,42px); font-weight: 800; color: #fff; margin-bottom: 14px; line-height: 1.1; }
+        .section-title em { color: var(--cyan); font-style: normal; }
+        .section-desc { font-size: 15px; color: #777; line-height: 1.8; max-width: 660px; margin-bottom: 48px; }
 
-        .project-logo img {
-            max-width: 120px; /* Aumentando o logo para 120px */
-        }
+        /* STATS */
+        .stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        .stat-cell { background: var(--bg2); padding: 28px 20px; text-align: center; }
+        .stat-number { font-family: 'Space Mono', monospace; font-size: 22px; font-weight: 700; color: var(--cyan); display: block; margin-bottom: 8px; }
+        .stat-label { font-size: 12px; color: var(--muted); line-height: 1.5; }
 
-        .project-title {
-            font-size: 48px;
-            margin-bottom: 10px;
-            color: #0fdaf1;
-        }
+        /* METHOD CARDS */
+        .method-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+        .method-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 28px 24px; transition: border-color 0.3s; }
+        .method-card:hover { border-color: var(--cyan-mid); }
+        .method-icon { width: 40px; height: 40px; border-radius: 8px; background: var(--cyan-dim); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; color: var(--cyan); }
+        .method-title { font-size: 15px; font-weight: 700; color: #ddd; margin-bottom: 9px; }
+        .method-text { font-size: 13px; color: #5a5a5a; line-height: 1.65; }
 
-        /* Mover a descrição para baixo da imagem de fundo */
-        .project-description {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #1a1a1a;
-            color: #fff;
-            max-width: 600px;
-            line-height: 1.6;
-            color: #ccc;
-        }
+        /* PHOTO GRID */
+        .photo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 56px; }
+        .photo-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
+        .photo-card:hover { border-color: var(--cyan-mid); transform: translateY(-4px); }
+        .photo-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; border-bottom: 1px solid var(--border); }
+        .photo-card-body { padding: 14px 18px; }
+        .photo-card-label { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
 
-        h2, h3 {
-            color: #0fdaf1;
-        }
+        /* GALLERY GROUP */
+        .gallery-group { margin-bottom: 60px; }
+        .gallery-group-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .gallery-group-title::before { content: ''; display: block; width: 16px; height: 2px; background: var(--cyan); border-radius: 2px; }
 
-        /* Estilo da galeria de fotos */
-        .photo-gallery {
-            margin-top: 40px;
-        }
+        /* FOOTER */
+        footer { border-top: 1px solid var(--border); padding: 28px 60px; display: flex; align-items: center; justify-content: space-between; }
+        footer span, footer a { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.06em; }
+        footer span { color: var(--muted); }
+        footer a { color: var(--cyan); text-decoration: none; }
 
-        .gallery-section {
-            margin-bottom: 40px;
-        }
+        @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.8)} }
+        .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); display: inline-block; animation: pulse-dot 1.6s ease-in-out infinite; }
 
-        .gallery-title {
-            font-size: 24px;
-            margin-bottom: 10px;
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; }
+            .hero-right { height: 260px; }
+            .hero-left { padding: 110px 24px 60px; }
+            .section { padding: 60px 24px; }
+            .stats-row { grid-template-columns: repeat(2,1fr); }
+            .method-grid { grid-template-columns: 1fr; }
+            .photo-grid { grid-template-columns: 1fr 1fr; }
+            .divider { margin: 0 24px; }
+            footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+            .site-header { padding: 14px 24px; }
         }
-
-        .photo-row {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
+        @media (max-width: 560px) {
+            .photo-grid { grid-template-columns: 1fr; }
         }
-
-        .photo-item {
-            flex: 1;
-            margin: 10px;
-            max-width: 30%;
-        }
-
-        .photo-item img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
+        html[data-lang="pt-BR"] .en-only { display: none !important; }
+        html[data-lang="en-US"] .pt-only { display: none !important; }
     </style>
 </head>
 <body>
 
-    <!-- Seção de fundo com imagem e degradê -->
-    <div class="background">
-        <div class="container">
-            <div class="project-header">
-                <div class="project-logo">
-                    <img src="icons/project2.webp" alt="Logo do Projeto">
+<header class="site-header">
+    <a class="header-logo" href="index.html">← PORTFÓLIO</a>
+    <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="pt-BR" onclick="setLang('pt-BR')">PT</button>
+        <button class="lang-btn" data-lang="en-US" onclick="setLang('en-US')">EN</button>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-left">
+        <div class="hero-tag">
+            <span class="live-dot"></span>
+            <span class="pt-only">Pesquisa CNPq &middot; 2021–2022</span>
+            <span class="en-only">CNPq Research &middot; 2021–2022</span>
+        </div>
+        <h1 class="hero-title">
+            Reconstrução
+            <em>3D</em>
+        </h1>
+        <p class="hero-subtitle pt-only">Ambientes Virtuais com Nuvem de Pontos ToF<br>Python · Unity · Câmera Time-of-Flight</p>
+        <p class="hero-subtitle en-only">Virtual Environments with ToF Point Cloud<br>Python · Unity · Time-of-Flight Camera</p>
+        <p class="hero-desc pt-only">Protótipo de sistema computacional para reconstrução 3D de objetos baseada em nuvens de pontos ToF, aplicado em ambiente virtual imersivo de realidade mista para treinamento de trabalhadores de chão de fábrica.</p>
+        <p class="hero-desc en-only">Computational system prototype for 3D object reconstruction based on ToF point clouds, applied in an immersive mixed reality virtual environment for factory floor worker training.</p>
+        <div class="hero-pills">
+            <span class="pill">Python</span>
+            <span class="pill">Unity</span>
+            <span class="pill">ToF Camera</span>
+            <span class="pill pt-only">Nuvem de Pontos</span>
+            <span class="pill en-only">Point Cloud</span>
+            <span class="pill pt-only">Realidade Mista</span>
+            <span class="pill en-only">Mixed Reality</span>
+            <span class="pill">CNPq</span>
+        </div>
+    </div>
+    <div class="hero-right">
+        <div class="hero-bg-img"></div>
+        <div class="scanlines"></div>
+        <div class="hero-logo-overlay">
+            <img src="icons/project2.webp" alt="Reconstrução 3D Logo">
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="section" style="padding-top:60px;padding-bottom:60px;">
+    <div class="stats-row">
+        <div class="stat-cell">
+            <span class="stat-number">ToF</span>
+            <span class="stat-label pt-only">Câmera<br>Time-of-Flight</span>
+            <span class="stat-label en-only">Time-of-Flight<br>Camera</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-number">3D</span>
+            <span class="stat-label pt-only">Reconstrução<br>Tridimensional</span>
+            <span class="stat-label en-only">3D<br>Reconstruction</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-number">RM</span>
+            <span class="stat-label pt-only">Realidade<br>Mista</span>
+            <span class="stat-label en-only">Mixed<br>Reality</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-number">CNPq</span>
+            <span class="stat-label pt-only">Pesquisa<br>Acadêmica</span>
+            <span class="stat-label en-only">Academic<br>Research</span>
+        </div>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<section class="section">
+    <div class="section-label pt-only">Sobre o Projeto</div>
+    <div class="section-label en-only">About the Project</div>
+    <h2 class="section-title pt-only">Reconstrução <em>3D</em><br>para Ambientes Interativos</h2>
+    <h2 class="section-title en-only"><em>3D Reconstruction</em><br>for Interactive Environments</h2>
+    <p class="section-desc pt-only">O projeto desenvolve um protótipo que utiliza câmera Time-of-Flight para capturar nuvens de pontos de objetos reais e reconstruí-los em ambientes virtuais de realidade mista, viabilizando treinamentos imersivos para trabalhadores industriais.</p>
+    <p class="section-desc en-only">The project develops a prototype that uses a Time-of-Flight camera to capture point clouds of real objects and reconstruct them in mixed reality virtual environments, enabling immersive training for industrial workers.</p>
+
+    <div class="method-grid">
+        <div class="method-card">
+            <div class="method-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="method-title pt-only">Câmera ToF</div>
+            <div class="method-title en-only">ToF Camera</div>
+            <p class="method-text pt-only">Captura de profundidade em tempo real com câmera Time-of-Flight, gerando nuvens de pontos densas e precisas de objetos e ambientes físicos.</p>
+            <p class="method-text en-only">Real-time depth capture with a Time-of-Flight camera, generating dense and accurate point clouds of physical objects and environments.</p>
+        </div>
+        <div class="method-card">
+            <div class="method-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 6 6m0-6-6 6"/></svg>
+            </div>
+            <div class="method-title pt-only">Reconstrução 3D</div>
+            <div class="method-title en-only">3D Reconstruction</div>
+            <p class="method-text pt-only">Processamento e reconstrução de malhas 3D a partir das nuvens de pontos capturadas, utilizando algoritmos de reconstrução de superfície em Python.</p>
+            <p class="method-text en-only">Processing and reconstruction of 3D meshes from captured point clouds, using surface reconstruction algorithms in Python.</p>
+        </div>
+        <div class="method-card">
+            <div class="method-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </div>
+            <div class="method-title pt-only">Realidade Mista</div>
+            <div class="method-title en-only">Mixed Reality</div>
+            <p class="method-text pt-only">Integração dos modelos 3D em ambiente virtual imersivo Unity para simulação de montagem de equipamentos industriais em realidade mista.</p>
+            <p class="method-text en-only">Integration of 3D models into an immersive Unity virtual environment for industrial equipment assembly simulation in mixed reality.</p>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GALLERY -->
+<section class="section">
+    <div class="section-label pt-only">Galeria</div>
+    <div class="section-label en-only">Gallery</div>
+    <h2 class="section-title pt-only"><em>Imagens</em> do Projeto</h2>
+    <h2 class="section-title en-only">Project <em>Images</em></h2>
+    <p class="section-desc pt-only">Etapas do desenvolvimento — da construção do sistema de captura até a renderização final e modelo físico do MVP.</p>
+    <p class="section-desc en-only">Development stages — from building the capture system to the final rendering and physical MVP model.</p>
+
+    <!-- Construção -->
+    <div class="gallery-group">
+        <div class="gallery-group-title pt-only">Construção</div>
+        <div class="gallery-group-title en-only">Construction</div>
+        <div class="photo-grid">
+            <div class="photo-card">
+                <img src="RA/1.png" alt="Construção 1">
+                <div class="photo-card-body">
+                    <span class="photo-card-label pt-only">Montagem do Sistema</span>
+                    <span class="photo-card-label en-only">System Assembly</span>
                 </div>
-                <h1 class="project-title">Reconstrução 3D</h1>
+            </div>
+            <div class="photo-card">
+                <img src="RA/2.png" alt="Construção 2">
+                <div class="photo-card-body">
+                    <span class="photo-card-label pt-only">Câmera ToF</span>
+                    <span class="photo-card-label en-only">ToF Camera</span>
+                </div>
+            </div>
+            <div class="photo-card">
+                <img src="RA/3.png" alt="Construção 3">
+                <div class="photo-card-body">
+                    <span class="photo-card-label pt-only">Captura de Nuvem de Pontos</span>
+                    <span class="photo-card-label en-only">Point Cloud Capture</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Descrição abaixo da imagem de fundo -->
-    <div class="container">
-        <div class="project-description">
-            <p>O propósito do projeto é desenvolver um protótipo de um sistema computacional, utilizando reconstrução 3D de objetos baseada em nuvens de pontos, no qual serão adquiridas a partir de uma câmera Tof e aplicadas em um ambiente virtual de simulação imersiva e realidade mista (RM), a fim de ser aplicado em treinamento de trabalhadores de chão de fábrica.</p>
-        </div>
-
-        <h2>Galeria de Fotos</h2>
-
-        <!-- Linha 1: Construção -->
-        <div class="gallery-section">
-            <h3 class="gallery-title">Construção</h3>
-            <div class="photo-row">
-                <div class="photo-item">
-                    <img src="RA/1.png" alt="Construção 1">
-                </div>
-                <div class="photo-item">
-                    <img src="RA/2.png" alt="Construção 2">
-                </div>
-                <div class="photo-item">
-                    <img src="RA/3.png" alt="Construção 3">
+    <!-- Renderização -->
+    <div class="gallery-group">
+        <div class="gallery-group-title pt-only">Renderização</div>
+        <div class="gallery-group-title en-only">Rendering</div>
+        <div class="photo-grid">
+            <div class="photo-card">
+                <img src="RA/5.png" alt="Renderização 1">
+                <div class="photo-card-body">
+                    <span class="photo-card-label pt-only">Reconstrução 3D — Vista 1</span>
+                    <span class="photo-card-label en-only">3D Reconstruction — View 1</span>
                 </div>
             </div>
-        </div>
-
-        <!-- Linha 2: Renderização -->
-        <div class="gallery-section">
-            <h3 class="gallery-title">Renderização</h3>
-            <div class="photo-row">
-                <div class="photo-item">
-                    <img src="RA/5.png" alt="Renderização 1">
-                </div>
-                <div class="photo-item">
-                    <img src="RA/6.png" alt="Renderização 2">
-                </div>
-                <div class="photo-item">
-                    <img src="RA/7.png" alt="Renderização 3">
+            <div class="photo-card">
+                <img src="RA/6.png" alt="Renderização 2">
+                <div class="photo-card-body">
+                    <span class="photo-card-label pt-only">Reconstrução 3D — Vista 2</span>
+                    <span class="photo-card-label en-only">3D Reconstruction — View 2</span>
                 </div>
             </div>
-        </div>
-
-        <!-- Linha 3: MVP e Modelo Físico -->
-        <div class="gallery-section">
-            <h3 class="gallery-title">MVP e Modelo Físico</h3>
-            <div class="photo-row">
-                <div class="photo-item">
-                    <img src="RA/10.png" alt="MVP 1">
-                </div>
-                <div class="photo-item">
-                    <img src="RA/11.png" alt="MVP 2">
-                </div>
-                <div class="photo-item">
-                    <img src="RA/12.png" alt="Modelo Físico 3">
+            <div class="photo-card">
+                <img src="RA/7.png" alt="Renderização 3">
+                <div class="photo-card-body">
+                    <span class="photo-card-label pt-only">Ambiente Virtual Unity</span>
+                    <span class="photo-card-label en-only">Unity Virtual Environment</span>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- MVP -->
+    <div class="gallery-group">
+        <div class="gallery-group-title pt-only">MVP e Modelo Físico</div>
+        <div class="gallery-group-title en-only">MVP & Physical Model</div>
+        <div class="photo-grid">
+            <div class="photo-card">
+                <img src="RA/10.png" alt="MVP 1">
+                <div class="photo-card-body">
+                    <span class="photo-card-label pt-only">Protótipo Final</span>
+                    <span class="photo-card-label en-only">Final Prototype</span>
+                </div>
+            </div>
+            <div class="photo-card">
+                <img src="RA/11.png" alt="MVP 2">
+                <div class="photo-card-body">
+                    <span class="photo-card-label pt-only">Realidade Mista — Demo</span>
+                    <span class="photo-card-label en-only">Mixed Reality — Demo</span>
+                </div>
+            </div>
+            <div class="photo-card">
+                <img src="RA/12.png" alt="Modelo Físico">
+                <div class="photo-card-body">
+                    <span class="photo-card-label pt-only">Modelo Físico</span>
+                    <span class="photo-card-label en-only">Physical Model</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <span>Reconstrução 3D © 2021–2022 · Leandro Guimarães · CNPq</span>
+    <a href="index.html" class="pt-only">← Voltar ao Portfólio</a>
+    <a href="index.html" class="en-only">← Back to Portfolio</a>
+</footer>
+
+<script>
+    function setLang(lang) {
+        document.documentElement.setAttribute('data-lang', lang);
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+        try { localStorage.setItem('portfolio_lang', lang); } catch(e) {}
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        let saved = 'pt-BR';
+        try { saved = localStorage.getItem('portfolio_lang') || 'pt-BR'; } catch(e) {}
+        setLang(saved);
+    });
+</script>
 </body>
 </html>
