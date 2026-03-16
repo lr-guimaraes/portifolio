@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato — Leandro Guimarães</title>
+    <link rel="shortcut icon" href="./icons/prog.jpeg" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --cyan: #0fdaf1;
+            --cyan-dim: rgba(15,218,241,0.12);
+            --cyan-mid: rgba(15,218,241,0.4);
+            --bg: #0e0e0e;
+            --bg2: #141414;
+            --bg3: #1a1a1a;
+            --muted: #888;
+            --border: rgba(15,218,241,0.18);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Syne', sans-serif; background: var(--bg); color: #e8e8e8; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+
+        /* HEADER */
+        .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 48px; background: rgba(14,14,14,0.9); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+        .header-logo { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--cyan); letter-spacing: 0.1em; text-decoration: none; }
+        .header-right { display: flex; align-items: center; gap: 24px; }
+        .header-nav a { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; margin-left: 24px; transition: color 0.2s; }
+        .header-nav a:hover { color: var(--cyan); }
+        .lang-toggle { display: flex; gap: 4px; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 3px; }
+        .lang-btn { font-family: 'Space Mono', monospace; font-size: 11px; padding: 4px 10px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s; background: transparent; color: var(--muted); letter-spacing: 0.08em; }
+        .lang-btn.active { background: var(--cyan); color: #000; font-weight: 700; }
+
+        /* MAIN */
+        main { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 100px 60px 60px; max-width: 1280px; margin: 0 auto; width: 100%; }
+
+        /* HERO */
+        .contact-hero { margin-bottom: 80px; }
+        .hero-tag { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--cyan); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+        .hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--cyan); }
+        .contact-title { font-size: clamp(44px,7vw,88px); font-weight: 800; line-height: 0.92; letter-spacing: -0.03em; color: #fff; margin-bottom: 20px; }
+        .contact-title em { color: var(--cyan); font-style: normal; display: block; }
+        .contact-lead { font-size: 16px; color: #777; line-height: 1.8; max-width: 520px; }
+
+        /* CONTACT GRID */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 48px; }
+        .contact-card {
+            background: var(--bg2); border: 1px solid var(--border); border-radius: 14px;
+            padding: 32px 28px; display: flex; align-items: center; gap: 20px;
+            text-decoration: none; color: inherit;
+            transition: border-color 0.3s, transform 0.3s;
+            position: relative; overflow: hidden;
+        }
+        .contact-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(180deg, var(--cyan), transparent); opacity: 0; transition: opacity 0.3s; }
+        .contact-card:hover { border-color: var(--cyan-mid); transform: translateY(-4px); }
+        .contact-card:hover::before { opacity: 1; }
+        .contact-icon { width: 52px; height: 52px; border-radius: 12px; background: var(--cyan-dim); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--cyan); flex-shrink: 0; }
+        .contact-body {}
+        .contact-platform { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+        .contact-name { font-size: 16px; font-weight: 700; color: #ddd; margin-bottom: 4px; }
+        .contact-handle { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--cyan); }
+        .contact-arrow { position: absolute; right: 24px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 18px; transition: color 0.2s, transform 0.2s; }
+        .contact-card:hover .contact-arrow { color: var(--cyan); transform: translateY(-50%) translateX(4px); }
+
+        /* DIVIDER */
+        .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent); margin: 0 0 48px; }
+
+        /* AVAILABILITY BANNER */
+        .availability-banner {
+            background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+            padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+        }
+        .avail-left { display: flex; align-items: center; gap: 16px; }
+        .avail-dot { width: 10px; height: 10px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px rgba(34,197,94,0.5); flex-shrink: 0; animation: green-pulse 2s ease-in-out infinite; }
+        @keyframes green-pulse { 0%,100%{box-shadow:0 0 10px rgba(34,197,94,0.5)}50%{box-shadow:0 0 20px rgba(34,197,94,0.8)} }
+        .avail-text {}
+        .avail-title { font-size: 15px; font-weight: 700; color: #ddd; margin-bottom: 4px; }
+        .avail-sub { font-size: 13px; color: var(--muted); }
+        .btn-primary { font-family: 'Space Mono', monospace; font-size: 12px; padding: 12px 28px; background: var(--cyan); color: #000; border: none; border-radius: 6px; cursor: pointer; text-decoration: none; letter-spacing: 0.08em; font-weight: 700; transition: opacity 0.2s; white-space: nowrap; }
+        .btn-primary:hover { opacity: 0.85; }
+
+        /* FOOTER */
+        footer { border-top: 1px solid var(--border); padding: 28px 60px; display: flex; align-items: center; justify-content: space-between; }
+        footer span, footer a { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.06em; }
+        footer span { color: var(--muted); }
+        footer a { color: var(--cyan); text-decoration: none; }
+
+        @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.8)} }
+        .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); display: inline-block; animation: pulse-dot 1.6s ease-in-out infinite; }
+
+        @media (max-width: 900px) {
+            .site-header { padding: 14px 24px; }
+            .header-nav { display: none; }
+            main { padding: 100px 24px 60px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .availability-banner { flex-direction: column; align-items: flex-start; }
+            footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+        }
+        html[data-lang="pt-BR"] .en-only { display: none !important; }
+        html[data-lang="en-US"] .pt-only { display: none !important; }
+    </style>
+</head>
+<body>
+
+<header class="site-header"></header>
+
+<main>
+    <!-- HERO -->
+    <div class="contact-hero">
+        <div class="hero-tag">
+            <span class="live-dot"></span>
+            <span class="pt-only">Vamos conversar</span>
+            <span class="en-only">Let's talk</span>
+        </div>
+        <h1 class="contact-title">
+            <span class="pt-only">Entre em<em>Contato</em></span>
+            <span class="en-only">Get in<em>Touch</em></span>
+        </h1>
+        <p class="contact-lead pt-only">Fique à vontade para entrar em contato para oportunidades, colaborações ou apenas para trocar uma ideia sobre tecnologia.</p>
+        <p class="contact-lead en-only">Feel free to reach out for opportunities, collaborations, or just to chat about technology.</p>
+    </div>
+
+    <!-- CONTACT CARDS -->
+    <div class="contact-grid">
+        <a class="contact-card" href="https://www.linkedin.com/in/leandrorguimaraes" target="_blank">
+            <div class="contact-icon"><i class="bi bi-linkedin"></i></div>
+            <div class="contact-body">
+                <div class="contact-platform">LinkedIn</div>
+                <div class="contact-name">Leandro Ricardo Guimarães</div>
+                <div class="contact-handle">leandrorguimaraes</div>
+            </div>
+            <i class="bi bi-arrow-right contact-arrow"></i>
+        </a>
+
+        <a class="contact-card" href="/cdn-cgi/l/email-protection#a3cfc6c2cdc7d1ccd1c4909394e3c4cec2cacf8dc0ccce">
+            <div class="contact-icon"><i class="bi bi-envelope"></i></div>
+            <div class="contact-body">
+                <div class="contact-platform">Email</div>
+                <div class="contact-name pt-only">Enviar Email</div>
+                <div class="contact-name en-only">Send Email</div>
+                <div class="contact-handle"><span class="__cf_email__" data-cfemail="2f434a4e414b5d405d481c1f186f48424e4643014c4042">[email&#160;protected]</span></div>
+            </div>
+            <i class="bi bi-arrow-right contact-arrow"></i>
+        </a>
+
+        <a class="contact-card" href="https://gitlab.com/lr-guimaraes" target="_blank">
+            <div class="contact-icon"><i class="bi bi-gitlab"></i></div>
+            <div class="contact-body">
+                <div class="contact-platform">GitLab</div>
+                <div class="contact-name pt-only">Ver Projetos</div>
+                <div class="contact-name en-only">View Projects</div>
+                <div class="contact-handle">lr-guimaraes</div>
+            </div>
+            <i class="bi bi-arrow-right contact-arrow"></i>
+        </a>
+
+        <a class="contact-card" href="tel:+5541987021076">
+            <div class="contact-icon"><i class="bi bi-telephone"></i></div>
+            <div class="contact-body">
+                <div class="contact-platform pt-only">Telefone</div>
+                <div class="contact-platform en-only">Phone</div>
+                <div class="contact-name pt-only">Ligar Agora</div>
+                <div class="contact-name en-only">Call Now</div>
+                <div class="contact-handle">+55 (41) 98702-1076</div>
+            </div>
+            <i class="bi bi-arrow-right contact-arrow"></i>
+        </a>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- AVAILABILITY -->
+    <div class="availability-banner">
+        <div class="avail-left">
+            <div class="avail-dot"></div>
+            <div class="avail-text">
+                <div class="avail-title pt-only">Disponível para novas oportunidades</div>
+                <div class="avail-title en-only">Available for new opportunities</div>
+                <div class="avail-sub pt-only">Curitiba, PR, Brazil · Full Stack · IA · Sistemas Embarcados</div>
+                <div class="avail-sub en-only">Curitiba, PR, Brazil · Full Stack · AI · Embedded Systems</div>
+            </div>
+        </div>
+        <a href="/cdn-cgi/l/email-protection#ff939a9e919b8d908d98cccfc8bf98929e9693d19c9092" class="btn-primary pt-only">Enviar Email</a>
+        <a href="/cdn-cgi/l/email-protection#d6bab3b7b8b2a4b9a4b1e5e6e196b1bbb7bfbaf8b5b9bb" class="btn-primary en-only">Send Email</a>
+    </div>
+</main>
+
+<footer></footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    function setLang(lang) {
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.setAttribute('lang', lang);
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', -e 
+</script>
+<script src="nav.js"></script>
+</body>
+</html>
