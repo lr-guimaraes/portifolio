@@ -733,14 +733,21 @@
 
     <div class="video-grid">
         <div class="video-card">
-            <div class="video-placeholder">
-                <!-- To add video: uncomment below and set the correct path -->
-                <!-- <video controls><source src="vicon/pre_fadiga.mp4" type="video/mp4"></video> -->
-                <div class="play-icon">
+            <div class="video-placeholder" style="flex-direction:column;gap:14px;">
+                <video controls style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+                    <source src="VIDEO_Participante_01.avi" type="video/x-msvideo">
+                    <source src="VIDEO_Participante_01.mp4" type="video/mp4">
+                </video>
+                <!-- fallback shown only if video fails to load -->
+                <div class="play-icon" style="z-index:2;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="#0fdaf1"><polygon points="5,3 19,12 5,21"/></svg>
                 </div>
-                <span class="placeholder-label pt-only">VIDEO_Participante_01.avi</span>
-                <span class="placeholder-label en-only">VIDEO_Participant_01.avi</span>
+                <a href="VIDEO_Participante_01.avi" download
+                   style="z-index:2;font-family:'Space Mono',monospace;font-size:10px;color:#0fdaf1;letter-spacing:0.1em;text-decoration:none;background:rgba(15,218,241,0.1);border:1px solid rgba(15,218,241,0.3);padding:5px 12px;border-radius:4px;"
+                   class="pt-only">⬇ Baixar Vídeo</a>
+                <a href="VIDEO_Participante_01.avi" download
+                   style="z-index:2;font-family:'Space Mono',monospace;font-size:10px;color:#0fdaf1;letter-spacing:0.1em;text-decoration:none;background:rgba(15,218,241,0.1);border:1px solid rgba(15,218,241,0.3);padding:5px 12px;border-radius:4px;"
+                   class="en-only">⬇ Download Video</a>
             </div>
             <div class="video-card-body">
                 <div class="video-card-title pt-only">STS — Pré-Fadiga</div>
@@ -806,10 +813,10 @@
             </div>
             <span class="data-badge">GRF · N</span>
         </div>
-        <div class="chart-placeholder">
-            <canvas id="grfCanvas"></canvas>
-            <span class="chart-label-overlay pt-only">GRF_STS_Participante_01.png</span>
-            <span class="chart-label-overlay en-only">GRF_STS_Participant_01.png</span>
+        <div class="chart-placeholder" style="height:auto;min-height:180px;">
+            <img src="GRF_STS_Participante_01.png"
+                 alt="GRF — STS Participante 01"
+                 style="width:100%;height:auto;max-height:400px;object-fit:contain;border-radius:6px;background:#1a1a1a;padding:8px;">
         </div>
     </div>
 
@@ -823,10 +830,10 @@
             </div>
             <span class="data-badge">COP · mm</span>
         </div>
-        <div class="chart-placeholder">
-            <canvas id="copCanvas"></canvas>
-            <span class="chart-label-overlay pt-only">COP_STS_Participante_01.png</span>
-            <span class="chart-label-overlay en-only">COP_STS_Participant_01.png</span>
+        <div class="chart-placeholder" style="height:auto;min-height:180px;">
+            <img src="COP_STS_Participante_01.png"
+                 alt="COP — STS Participante 01"
+                 style="width:100%;height:auto;max-height:400px;object-fit:contain;border-radius:6px;background:#1a1a1a;padding:8px;">
         </div>
     </div>
 
@@ -836,25 +843,22 @@
         <h3 style="color:#fff; font-size:17px; font-weight:700; margin-bottom:20px;" class="en-only">Videos — Force Platform</h3>
         <div class="video-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
             <div class="video-card">
-                <div class="video-placeholder">
-                    <!-- <video controls><source src="force/protocolo.mp4" type="video/mp4"></video> -->
-                    <div class="play-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="#0fdaf1"><polygon points="5,3 19,12 5,21"/></svg></div>
-                    <span class="placeholder-label pt-only">ADICIONAR VÍDEO</span>
-                    <span class="placeholder-label en-only">ADD VIDEO</span>
+                <div class="video-placeholder" style="aspect-ratio:unset;min-height:200px;">
+                    <img src="ESTABILIDADE_UNIFICADA_Participante_01.png"
+                         alt="Estabilidade Unificada — Participante 01"
+                         style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#1a1a1a;padding:8px;">
                 </div>
                 <div class="video-card-body">
                     <div class="video-card-title pt-only">Magnitude de Força Vertical — STS</div>
                     <div class="video-card-title en-only">Vertical Force Magnitude — STS</div>
-                    <div class="video-card-meta pt-only">ESTABILIDADE_UNIFICADA_Participante_01.png</div>
-                    <div class="video-card-meta en-only">ESTABILIDADE_UNIFICADA_Participant_01.png</div>
+                    <div class="video-card-meta">ESTABILIDADE_UNIFICADA_Participante_01.png</div>
                 </div>
             </div>
             <div class="video-card">
-                <div class="video-placeholder">
-                    <!-- <video controls><source src="force/cop_video.mp4" type="video/mp4"></video> -->
-                    <div class="play-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="#0fdaf1"><polygon points="5,3 19,12 5,21"/></svg></div>
-                    <span class="placeholder-label pt-only">ADICIONAR VÍDEO</span>
-                    <span class="placeholder-label en-only">ADD VIDEO</span>
+                <div class="video-placeholder" style="aspect-ratio:unset;min-height:200px;">
+                    <img src="MEDIA_GLOBAL_FORCAS.png"
+                         alt="Média Global de Forças — STS"
+                         style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#1a1a1a;padding:8px;">
                 </div>
                 <div class="video-card-body">
                     <div class="video-card-title pt-only">Média Global de Forças — STS</div>
@@ -890,10 +894,10 @@
             </div>
             <span class="data-badge">sEMG · µV</span>
         </div>
-        <div class="chart-placeholder">
-            <canvas id="emg1Canvas"></canvas>
-            <span class="chart-label-overlay pt-only">Semitendinoso_emg.png</span>
-            <span class="chart-label-overlay en-only">Semitendinosus_emg.png</span>
+        <div class="chart-placeholder" style="height:auto;min-height:180px;">
+            <img src="Semitendinoso_emg.png"
+                 alt="Sinal EMG — Semitendinoso"
+                 style="width:100%;height:auto;max-height:400px;object-fit:contain;border-radius:6px;background:#1a1a1a;padding:8px;">
         </div>
     </div>
 
@@ -907,10 +911,10 @@
             </div>
             <span class="data-badge">sEMG · µV</span>
         </div>
-        <div class="chart-placeholder">
-            <canvas id="emg2Canvas"></canvas>
-            <span class="chart-label-overlay pt-only">Vasto_lateral_emg.png</span>
-            <span class="chart-label-overlay en-only">Vastus_lateralis_emg.png</span>
+        <div class="chart-placeholder" style="height:auto;min-height:180px;">
+            <img src="Vasto_lateral_emg.png"
+                 alt="Sinal EMG — Vasto Lateral"
+                 style="width:100%;height:auto;max-height:400px;object-fit:contain;border-radius:6px;background:#1a1a1a;padding:8px;">
         </div>
     </div>
 
