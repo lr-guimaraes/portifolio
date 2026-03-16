@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato — Leandro Guimarães</title>
+    <title>Sobre — Leandro Guimarães</title>
     <link rel="shortcut icon" href="./icons/prog.jpeg" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -20,81 +20,97 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Syne', sans-serif; background: var(--bg); color: #e8e8e8; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+        body { font-family: 'Syne', sans-serif; background: var(--bg); color: #e8e8e8; overflow-x: hidden; }
 
-        /* HEADER */
         .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 48px; background: rgba(14,14,14,0.9); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
         .header-logo { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--cyan); letter-spacing: 0.1em; text-decoration: none; }
         .header-right { display: flex; align-items: center; gap: 24px; }
-        .header-nav a { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; margin-left: 24px; transition: color 0.2s; }
+        .header-nav a { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; margin-left: 20px; transition: color 0.2s; }
         .header-nav a:hover { color: var(--cyan); }
         .lang-toggle { display: flex; gap: 4px; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 3px; }
         .lang-btn { font-family: 'Space Mono', monospace; font-size: 11px; padding: 4px 10px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s; background: transparent; color: var(--muted); letter-spacing: 0.08em; }
         .lang-btn.active { background: var(--cyan); color: #000; font-weight: 700; }
 
-        /* MAIN */
-        main { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 100px 60px 60px; max-width: 1280px; margin: 0 auto; width: 100%; }
+        .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent); margin: 0 60px; }
+        .section { padding: 90px 60px; max-width: 1280px; margin: 0 auto; }
+        .section-label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.25em; color: var(--cyan); text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+        .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--cyan); }
 
         /* HERO */
-        .contact-hero { margin-bottom: 80px; }
+        .about-hero { min-height: 55vh; display: flex; flex-direction: column; justify-content: center; padding: 130px 60px 50px; max-width: 1280px; margin: 0 auto; }
         .hero-tag { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--cyan); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
         .hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--cyan); }
-        .contact-title { font-size: clamp(44px,7vw,88px); font-weight: 800; line-height: 0.92; letter-spacing: -0.03em; color: #fff; margin-bottom: 20px; }
-        .contact-title em { color: var(--cyan); font-style: normal; display: block; }
-        .contact-lead { font-size: 16px; color: #777; line-height: 1.8; max-width: 520px; }
+        .hero-h1 { font-size: clamp(44px,7vw,88px); font-weight: 800; line-height: 0.92; letter-spacing: -0.03em; color: #fff; margin-bottom: 0; }
+        .hero-h1 em { color: var(--cyan); font-style: normal; display: block; }
 
-        /* CONTACT GRID */
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 48px; }
-        .contact-card {
-            background: var(--bg2); border: 1px solid var(--border); border-radius: 14px;
-            padding: 32px 28px; display: flex; align-items: center; gap: 20px;
-            text-decoration: none; color: inherit;
-            transition: border-color 0.3s, transform 0.3s;
-            position: relative; overflow: hidden;
-        }
-        .contact-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(180deg, var(--cyan), transparent); opacity: 0; transition: opacity 0.3s; }
-        .contact-card:hover { border-color: var(--cyan-mid); transform: translateY(-4px); }
-        .contact-card:hover::before { opacity: 1; }
-        .contact-icon { width: 52px; height: 52px; border-radius: 12px; background: var(--cyan-dim); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--cyan); flex-shrink: 0; }
-        .contact-body {}
-        .contact-platform { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
-        .contact-name { font-size: 16px; font-weight: 700; color: #ddd; margin-bottom: 4px; }
-        .contact-handle { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--cyan); }
-        .contact-arrow { position: absolute; right: 24px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 18px; transition: color 0.2s, transform 0.2s; }
-        .contact-card:hover .contact-arrow { color: var(--cyan); transform: translateY(-50%) translateX(4px); }
+        @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.8)} }
+        .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); display: inline-block; animation: pulse-dot 1.6s ease-in-out infinite; }
 
-        /* DIVIDER */
-        .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent); margin: 0 0 48px; }
+        /* SPLIT LAYOUT */
+        .split { display: grid; grid-template-columns: 2fr 1fr; gap: 72px; align-items: start; }
+        .split-wide { display: grid; grid-template-columns: 3fr 2fr; gap: 72px; align-items: start; }
 
-        /* AVAILABILITY BANNER */
-        .availability-banner {
-            background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
-            padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
-        }
-        .avail-left { display: flex; align-items: center; gap: 16px; }
-        .avail-dot { width: 10px; height: 10px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px rgba(34,197,94,0.5); flex-shrink: 0; animation: green-pulse 2s ease-in-out infinite; }
-        @keyframes green-pulse { 0%,100%{box-shadow:0 0 10px rgba(34,197,94,0.5)}50%{box-shadow:0 0 20px rgba(34,197,94,0.8)} }
-        .avail-text {}
-        .avail-title { font-size: 15px; font-weight: 700; color: #ddd; margin-bottom: 4px; }
-        .avail-sub { font-size: 13px; color: var(--muted); }
-        .btn-primary { font-family: 'Space Mono', monospace; font-size: 12px; padding: 12px 28px; background: var(--cyan); color: #000; border: none; border-radius: 6px; cursor: pointer; text-decoration: none; letter-spacing: 0.08em; font-weight: 700; transition: opacity 0.2s; white-space: nowrap; }
-        .btn-primary:hover { opacity: 0.85; }
+        /* PROSE */
+        .about-para { font-size: 15px; color: #888; line-height: 1.9; margin-bottom: 22px; }
+        .about-para strong { color: #ccc; font-weight: 600; }
 
-        /* FOOTER */
+        /* TIMELINE */
+        .timeline { position: relative; padding-left: 28px; margin-top: 28px; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 0; width: 1px; background: var(--border); }
+        .timeline-item { position: relative; margin-bottom: 40px; }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-item::before { content: ''; position: absolute; left: -32px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px rgba(15,218,241,0.5); }
+        .timeline-date { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--cyan); letter-spacing: 0.08em; margin-bottom: 5px; }
+        .timeline-role { font-size: 16px; font-weight: 700; color: #ddd; margin-bottom: 3px; }
+        .timeline-company { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); letter-spacing: 0.04em; margin-bottom: 10px; }
+        .timeline-desc { font-size: 13px; color: #5a5a5a; line-height: 1.75; }
+        .timeline-desc strong { color: #888; }
+
+        /* SKILLS */
+        .skills-group { margin-bottom: 28px; }
+        .skills-group-label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: var(--cyan); text-transform: uppercase; margin-bottom: 12px; }
+        .skills-cloud { display: flex; flex-wrap: wrap; gap: 7px; }
+        .skill-tag { font-family: 'Space Mono', monospace; font-size: 11px; padding: 5px 12px; border: 1px solid var(--border); border-radius: 6px; color: #aaa; background: var(--bg2); letter-spacing: 0.04em; transition: border-color 0.2s, color 0.2s; }
+        .skill-tag:hover { border-color: var(--cyan-mid); color: var(--cyan); }
+        .skill-tag.hi { color: var(--cyan); background: var(--cyan-dim); border-color: rgba(15,218,241,0.22); }
+
+        /* SIDEBAR */
+        .sidebar-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 22px; margin-bottom: 14px; }
+        .sidebar-card-title { font-size: 13px; font-weight: 700; color: #ddd; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .sidebar-card-title i { color: var(--cyan); }
+        .sidebar-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+        .sidebar-item:last-child { margin-bottom: 0; }
+        .sidebar-item-icon { width: 30px; height: 30px; border-radius: 6px; background: var(--cyan-dim); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--cyan); flex-shrink: 0; }
+        .sidebar-item-label { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 2px; }
+        .sidebar-item-value { font-size: 13px; color: #ddd; font-weight: 600; }
+        .sidebar-item-sub { font-size: 11px; color: #555; margin-top: 2px; }
+
+        /* LANG BARS */
+        .lang-bar { margin-bottom: 13px; }
+        .lang-bar:last-child { margin-bottom: 0; }
+        .lang-bar-header { display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+        .lang-bar-track { height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
+        .lang-bar-fill { height: 100%; background: var(--cyan); border-radius: 2px; }
+
+        /* CERT BADGE */
+        .cert-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 16px; margin-bottom: 10px; width: 100%; }
+        .cert-badge i { color: var(--cyan); font-size: 15px; flex-shrink: 0; }
+        .cert-badge-body {}
+        .cert-badge-name { font-size: 13px; font-weight: 600; color: #ddd; }
+        .cert-badge-org { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.06em; margin-top: 2px; }
+
         footer { border-top: 1px solid var(--border); padding: 28px 60px; display: flex; align-items: center; justify-content: space-between; }
         footer span, footer a { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.06em; }
         footer span { color: var(--muted); }
         footer a { color: var(--cyan); text-decoration: none; }
 
-        @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.8)} }
-        .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); display: inline-block; animation: pulse-dot 1.6s ease-in-out infinite; }
-
+        @media (max-width: 1024px) { .split { grid-template-columns: 1fr; gap: 48px; } .split-wide { grid-template-columns: 1fr; gap: 48px; } }
         @media (max-width: 900px) {
             .site-header { padding: 14px 24px; }
             .header-nav { display: none; }
-            main { padding: 100px 24px 60px; }
-            .contact-grid { grid-template-columns: 1fr; }
-            .availability-banner { flex-direction: column; align-items: flex-start; }
+            .about-hero { padding: 110px 24px 40px; }
+            .section { padding: 60px 24px; }
+            .divider { margin: 0 24px; }
             footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
         }
         html[data-lang="pt-BR"] .en-only { display: none !important; }
@@ -103,122 +119,341 @@
 </head>
 <body>
 
-<header class="site-header">
-    <a class="header-logo" href="index.html">← PORTFÓLIO</a>
-    <div class="header-right">
-        <nav class="header-nav">
-            <a href="sobre.html" class="pt-only">Sobre</a>
-            <a href="sobre.html" class="en-only">About</a>
-            <a href="index.html#projects" class="pt-only">Projetos</a>
-            <a href="index.html#projects" class="en-only">Projects</a>
-        </nav>
-        <div class="lang-toggle">
-            <button class="lang-btn active" data-lang="pt-BR" onclick="setLang('pt-BR')">PT</button>
-            <button class="lang-btn" data-lang="en-US" onclick="setLang('en-US')">EN</button>
+<header class="site-header"></header>
+
+<!-- ── HERO ── -->
+<div class="about-hero">
+    <div class="hero-tag">
+        <span class="live-dot"></span>
+        <span class="pt-only">Engenheiro de Computação &middot; Mestrando PUC-PR</span>
+        <span class="en-only">Computer Engineer &middot; Master's Student PUC-PR</span>
+    </div>
+    <h1 class="hero-h1">
+        <span class="pt-only">Sobre<em>Mim</em></span>
+        <span class="en-only">About<em>Me</em></span>
+    </h1>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── PERFIL + SIDEBAR ── -->
+<section class="section">
+    <div class="split">
+        <div>
+            <div class="section-label pt-only">Perfil Profissional</div>
+            <div class="section-label en-only">Professional Profile</div>
+
+            <p class="about-para pt-only">Sou <strong>Leandro Guimarães</strong>, Engenheiro de Computação (PUC-PR, 2019–2024) e Mestrando em <strong>Tecnologia em Saúde</strong> (PUC-PR, 2025–2027). Tenho sólida experiência em <strong>Desenvolvimento de Software, Engenharia de Dados e Inteligência Artificial</strong>, com atuação prática em projetos de visão computacional (OCR), pipelines de dados (Snowflake/Airflow) e automação (UiPath/Python).</p>
+            <p class="about-para en-only">I'm <strong>Leandro Guimarães</strong>, a Computer Engineer (PUC-PR, 2019–2024) and Master's student in <strong>Health Technology</strong> (PUC-PR, 2025–2027). I have solid experience in <strong>Software Development, Data Engineering, and Artificial Intelligence</strong>, with hands-on work in computer vision (OCR), data pipelines (Snowflake/Airflow), and automation (UiPath/Python).</p>
+
+            <p class="about-para pt-only">Tenho experiência em <strong>P&amp;D para o setor público e privado</strong>: projeto de ciência de dados na Unimed Federação (ML/Snowflake), engenharia de dados no Porto de Itapoá (Airflow/Snowflake) e IA aplicada à análise documental na SUFRAMA (OCR/ML). No mestrado desenvolvo o projeto <strong>HIIA</strong> — sistema multimodal de IA para detecção de fadiga em idosos.</p>
+            <p class="about-para en-only">I have experience in <strong>R&amp;D for public and private sectors</strong>: data science project at Unimed Federação (ML/Snowflake), data engineering at Porto de Itapoá (Airflow/Snowflake), and applied AI for document analysis at SUFRAMA (OCR/ML). For my Master's I develop <strong>HIIA</strong> — a multimodal AI system for fatigue detection in elderly individuals.</p>
+
+            <p class="about-para pt-only">Perfil colaborativo, foco em <strong>soluções escaláveis</strong> e otimização de processos, com experiência em gestão de projetos (Project Manager) e atuação tanto em startups quanto em grandes empresas.</p>
+            <p class="about-para en-only">Collaborative profile, focused on <strong>scalable solutions</strong> and process optimization, with experience in project management (Project Manager) and exposure to both startups and large companies.</p>
+
+            <a href="contato.html" style="display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:12px;padding:11px 24px;border:1px solid var(--border);border-radius:6px;color:var(--cyan);text-decoration:none;letter-spacing:0.08em;margin-top:8px;transition:border-color 0.2s,background 0.2s;" class="pt-only"><i class="bi bi-arrow-right"></i> Entre em contato</a>
+            <a href="contato.html" style="display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:12px;padding:11px 24px;border:1px solid var(--border);border-radius:6px;color:var(--cyan);text-decoration:none;letter-spacing:0.08em;margin-top:8px;" class="en-only"><i class="bi bi-arrow-right"></i> Get in touch</a>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div>
+            <!-- Quick Contact -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-title"><i class="bi bi-person-circle"></i> <span class="pt-only">Contato</span><span class="en-only">Contact</span></div>
+                <div class="sidebar-item">
+                    <div class="sidebar-item-icon"><i class="bi bi-envelope"></i></div>
+                    <div><div class="sidebar-item-label">Email</div><div class="sidebar-item-value" style="font-size:12px;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c70797d72786e736e7b2f2c2b5c7b717d7570327f7371">[email&#160;protected]</a></div></div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-item-icon"><i class="bi bi-telephone"></i></div>
+                    <div><div class="sidebar-item-label pt-only">Telefone</div><div class="sidebar-item-label en-only">Phone</div><div class="sidebar-item-value">+55 (41) 98702-1076</div></div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-item-icon"><i class="bi bi-geo-alt"></i></div>
+                    <div><div class="sidebar-item-label pt-only">Localização</div><div class="sidebar-item-label en-only">Location</div><div class="sidebar-item-value">Curitiba, PR — Brazil</div></div>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-title"><i class="bi bi-mortarboard"></i> <span class="pt-only">Formação</span><span class="en-only">Education</span></div>
+                <div class="sidebar-item">
+                    <div class="sidebar-item-icon"><i class="bi bi-journal-bookmark"></i></div>
+                    <div>
+                        <div class="sidebar-item-label pt-only">Mestrado · 2025–2027</div>
+                        <div class="sidebar-item-label en-only">Master's · 2025–2027</div>
+                        <div class="sidebar-item-value pt-only">Tecnologia em Saúde</div>
+                        <div class="sidebar-item-value en-only">Health Technology</div>
+                        <div class="sidebar-item-sub">PUC-PR</div>
+                    </div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-item-icon"><i class="bi bi-cpu"></i></div>
+                    <div>
+                        <div class="sidebar-item-label">2019–2024</div>
+                        <div class="sidebar-item-value pt-only">Engenharia de Computação</div>
+                        <div class="sidebar-item-value en-only">Computer Engineering</div>
+                        <div class="sidebar-item-sub">PUC-PR</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-title"><i class="bi bi-patch-check"></i> <span class="pt-only">Certificações</span><span class="en-only">Certifications</span></div>
+                <div class="cert-badge">
+                    <i class="bi bi-lightning-charge"></i>
+                    <div class="cert-badge-body">
+                        <div class="cert-badge-name pt-only">Sistemas Determinísticos com LLMs</div>
+                        <div class="cert-badge-name en-only">Deterministic Systems with LLMs</div>
+                        <div class="cert-badge-org">YC Academy · 2025</div>
+                    </div>
+                </div>
+                <div class="cert-badge" style="margin-bottom:0;">
+                    <i class="bi bi-flag"></i>
+                    <div class="cert-badge-body">
+                        <div class="cert-badge-name">Design Sprint</div>
+                        <div class="cert-badge-org">Sprint SXP · 2024</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Languages -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-title"><i class="bi bi-translate"></i> <span class="pt-only">Idiomas</span><span class="en-only">Languages</span></div>
+                <div class="lang-bar">
+                    <div class="lang-bar-header"><span class="pt-only">Português (Nativo)</span><span class="en-only">Portuguese (Native)</span><span>100%</span></div>
+                    <div class="lang-bar-track"><div class="lang-bar-fill" style="width:100%"></div></div>
+                </div>
+                <div class="lang-bar">
+                    <div class="lang-bar-header"><span class="pt-only">Inglês (Intermediário)</span><span class="en-only">English (Intermediate)</span><span>60%</span></div>
+                    <div class="lang-bar-track"><div class="lang-bar-fill" style="width:60%"></div></div>
+                </div>
+                <div class="lang-bar">
+                    <div class="lang-bar-header"><span class="pt-only">Espanhol (Básico)</span><span class="en-only">Spanish (Basic)</span><span>25%</span></div>
+                    <div class="lang-bar-track"><div class="lang-bar-fill" style="width:25%"></div></div>
+                </div>
+            </div>
+
+            <!-- Links -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-title"><i class="bi bi-link-45deg"></i> Links</div>
+                <div class="sidebar-item">
+                    <div class="sidebar-item-icon"><i class="bi bi-linkedin"></i></div>
+                    <div><div class="sidebar-item-label">LinkedIn</div><a href="https://www.linkedin.com/in/leandrorguimaraes" target="_blank" style="font-size:12px;color:var(--cyan);text-decoration:none;">leandrorguimaraes</a></div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-item-icon"><i class="bi bi-gitlab"></i></div>
+                    <div><div class="sidebar-item-label">GitLab</div><a href="https://gitlab.com/lr-guimaraes" target="_blank" style="font-size:12px;color:var(--cyan);text-decoration:none;">lr-guimaraes</a></div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-item-icon"><i class="bi bi-globe"></i></div>
+                    <div><div class="sidebar-item-label">Portfolio</div><a href="https://lr-guimaraes.github.io/portifolio/" target="_blank" style="font-size:12px;color:var(--cyan);text-decoration:none;word-break:break-all;">lr-guimaraes.github.io</a></div>
+                </div>
+            </div>
+
+            <!-- Download CV -->
+            <a href="Curri_culo_Simples_Profissional_-_Formac_a_o__experie_ncia__cursos_e_habilidades.pdf" target="_blank" class="pt-only" style="display:flex;align-items:center;justify-content:center;gap:10px;padding:14px;background:var(--cyan);color:#000;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.08em;border-radius:8px;text-decoration:none;margin-top:4px;">
+                <i class="bi bi-download"></i> Baixar Currículo (PDF)
+            </a>
+            <a href="cv en.pdf" target="_blank" class="en-only" style="display:flex;align-items:center;justify-content:center;gap:10px;padding:14px;background:var(--cyan);color:#000;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.08em;border-radius:8px;text-decoration:none;margin-top:4px;">
+                <i class="bi bi-download"></i> Download Resume (PDF)
+            </a>
         </div>
     </div>
-</header>
+</section>
 
-<main>
-    <!-- HERO -->
-    <div class="contact-hero">
-        <div class="hero-tag">
-            <span class="live-dot"></span>
-            <span class="pt-only">Vamos conversar</span>
-            <span class="en-only">Let's talk</span>
+<div class="divider"></div>
+
+<!-- ── EXPERIENCE TIMELINE + SKILLS ── -->
+<section class="section">
+    <div class="split-wide">
+
+        <!-- LEFT: Timeline -->
+        <div>
+            <div class="section-label pt-only">Experiência Profissional</div>
+            <div class="section-label en-only">Professional Experience</div>
+
+            <div class="timeline">
+
+                <!-- Kie Tec / Datakie Programador -->
+                <div class="timeline-item">
+                    <div class="timeline-date pt-only">Jan 2025 – Atualmente</div>
+                    <div class="timeline-date en-only">Jan 2025 – Present</div>
+                    <div class="timeline-role pt-only">Programador</div>
+                    <div class="timeline-role en-only">Programmer</div>
+                    <div class="timeline-company">Kie Tec &amp; Datakie</div>
+                    <p class="timeline-desc pt-only">
+                        <strong>Automações (UiPath):</strong> desenvolvimento e sustentação de automações em ambiente produtivo; IA aplicada — detecção de padrões textuais e clusterização de documentos; suporte técnico em go-live.<br><br>
+                        <strong>Dados &amp; IA — Unimed Federação:</strong> modelagem e consumo de dados em Snowflake; modelos de ML para análise de padrões e apoio à tomada de decisão; integração de dados estruturados para insights de negócio.<br><br>
+                        <strong>Engenharia de Dados — Porto de Itapoá:</strong> pipelines de ingestão e orquestração com Apache Airflow; processamento e armazenamento em Snowflake; estruturação de camadas analíticas escaláveis.<br><br>
+                        <strong>P&amp;D SUFRAMA:</strong> modelos OCR para extração automática de informações; identificação de padrões textuais e visuais; PoC concluída — solução em fase definitiva com foco em escalabilidade.
+                    </p>
+                    <p class="timeline-desc en-only">
+                        <strong>Automations (UiPath):</strong> development and maintenance of production automations; applied AI — text pattern detection, document clustering; go-live technical support.<br><br>
+                        <strong>Data &amp; AI — Unimed Federação:</strong> data modeling and consumption in Snowflake; ML models for pattern analysis and decision support; structured data integration for business insights.<br><br>
+                        <strong>Data Engineering — Porto de Itapoá:</strong> ingestion pipelines and orchestration with Apache Airflow; data processing and storage in Snowflake; scalable analytical layer structuring.<br><br>
+                        <strong>R&amp;D SUFRAMA:</strong> OCR models for automated information extraction; text and visual pattern identification; PoC successfully completed — now in definitive solution phase.
+                    </p>
+                </div>
+
+                <!-- Kie Tec Analista Jr -->
+                <div class="timeline-item">
+                    <div class="timeline-date">Nov 2024 – Jan 2025</div>
+                    <div class="timeline-role pt-only">Analista Jr</div>
+                    <div class="timeline-role en-only">Junior Analyst</div>
+                    <div class="timeline-company">Kie Tec</div>
+                    <p class="timeline-desc pt-only">Automação de processos com UiPath e Python. Suporte técnico go-live. Análise de dados com Tableau. Atuação como Project Manager em projeto de controle de acesso. Desenvolvimento com Node.js, React e PL/SQL.</p>
+                    <p class="timeline-desc en-only">Process automation with UiPath and Python. Go-live technical support. Data analysis with Tableau. Project Manager role for access control project. Development with Node.js, React, and PL/SQL.</p>
+                </div>
+
+                <!-- Henry -->
+                <div class="timeline-item">
+                    <div class="timeline-date">Jul 2024 – Nov 2024</div>
+                    <div class="timeline-role pt-only">Assistente de Engenharia</div>
+                    <div class="timeline-role en-only">Engineering Assistant</div>
+                    <div class="timeline-company">Henry Equipamentos Eletrônicos</div>
+                    <p class="timeline-desc pt-only">Sistemas embarcados para controle de acesso e relógios de ponto em C. IA para reconhecimento facial e de objetos. Integração de realidade aumentada com Python e C. Desenvolvimento com Node.js, React e PL/SQL.</p>
+                    <p class="timeline-desc en-only">Embedded systems for access control and time clocks in C. AI for facial and object recognition. Augmented reality integration with Python and C. Development with Node.js, React, and PL/SQL.</p>
+                </div>
+
+                <!-- Siemens -->
+                <div class="timeline-item">
+                    <div class="timeline-date">2022 – 2024</div>
+                    <div class="timeline-role pt-only">Estagiário</div>
+                    <div class="timeline-role en-only">Intern</div>
+                    <div class="timeline-company">Siemens</div>
+                    <p class="timeline-desc pt-only">Equipe OMS do projeto Siscon — gerenciamento de equipe e incidentes no SP7 com PL/SQL, XML, Java e C. Desenvolvimento de interface em Python. Automação com UiPath e Python. Análise de dados com Tableau. IA para detecção de padrões em textos.</p>
+                    <p class="timeline-desc en-only">OMS team on the Siscon project — team and incident management on SP7 with PL/SQL, XML, Java, and C. Python interface. Automation with UiPath and Python. Data analysis with Tableau. AI for text pattern detection.</p>
+                </div>
+
+                <!-- CNPq -->
+                <div class="timeline-item">
+                    <div class="timeline-date">2021 – 2022</div>
+                    <div class="timeline-role pt-only">Pesquisador CNPq</div>
+                    <div class="timeline-role en-only">CNPq Researcher</div>
+                    <div class="timeline-company">PUC-PR</div>
+                    <p class="timeline-desc pt-only">Reconstrução 3D com nuvem de pontos ToF para criação de ambientes virtuais em realidade mista. Python e Unity, câmera Time-of-Flight, análise interativa da montagem de equipamentos industriais.</p>
+                    <p class="timeline-desc en-only">3D reconstruction using ToF point clouds for mixed reality virtual environments. Python and Unity, Time-of-Flight camera, interactive analysis of industrial equipment assembly.</p>
+                </div>
+            </div>
         </div>
-        <h1 class="contact-title">
-            <span class="pt-only">Entre em<em>Contato</em></span>
-            <span class="en-only">Get in<em>Touch</em></span>
-        </h1>
-        <p class="contact-lead pt-only">Fique à vontade para entrar em contato para oportunidades, colaborações ou apenas para trocar uma ideia sobre tecnologia.</p>
-        <p class="contact-lead en-only">Feel free to reach out for opportunities, collaborations, or just to chat about technology.</p>
-    </div>
 
-    <!-- CONTACT CARDS -->
-    <div class="contact-grid">
-        <a class="contact-card" href="https://www.linkedin.com/in/leandrorguimaraes" target="_blank">
-            <div class="contact-icon"><i class="bi bi-linkedin"></i></div>
-            <div class="contact-body">
-                <div class="contact-platform">LinkedIn</div>
-                <div class="contact-name">Leandro Ricardo Guimarães</div>
-                <div class="contact-handle">leandrorguimaraes</div>
-            </div>
-            <i class="bi bi-arrow-right contact-arrow"></i>
-        </a>
+        <!-- RIGHT: Skills -->
+        <div>
+            <div class="section-label pt-only">Habilidades Técnicas</div>
+            <div class="section-label en-only">Technical Skills</div>
 
-        <a class="contact-card" href="mailto:leandrorg307@gmail.com">
-            <div class="contact-icon"><i class="bi bi-envelope"></i></div>
-            <div class="contact-body">
-                <div class="contact-platform">Email</div>
-                <div class="contact-name pt-only">Enviar Email</div>
-                <div class="contact-name en-only">Send Email</div>
-                <div class="contact-handle">leandrorg307@gmail.com</div>
-            </div>
-            <i class="bi bi-arrow-right contact-arrow"></i>
-        </a>
+            <div style="margin-top:28px;">
+                <div class="skills-group">
+                    <div class="skills-group-label pt-only">Linguagens</div>
+                    <div class="skills-group-label en-only">Languages</div>
+                    <div class="skills-cloud">
+                        <span class="skill-tag hi">Python</span>
+                        <span class="skill-tag hi">C / C++</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag hi">PL/SQL</span>
+                        <span class="skill-tag">XML</span>
+                        <span class="skill-tag">JavaScript</span>
+                    </div>
+                </div>
 
-        <a class="contact-card" href="https://gitlab.com/lr-guimaraes" target="_blank">
-            <div class="contact-icon"><i class="bi bi-gitlab"></i></div>
-            <div class="contact-body">
-                <div class="contact-platform">GitLab</div>
-                <div class="contact-name pt-only">Ver Projetos</div>
-                <div class="contact-name en-only">View Projects</div>
-                <div class="contact-handle">lr-guimaraes</div>
-            </div>
-            <i class="bi bi-arrow-right contact-arrow"></i>
-        </a>
+                <div class="skills-group">
+                    <div class="skills-group-label pt-only">Dados &amp; Cloud</div>
+                    <div class="skills-group-label en-only">Data &amp; Cloud</div>
+                    <div class="skills-cloud">
+                        <span class="skill-tag hi">Snowflake</span>
+                        <span class="skill-tag hi">Apache Airflow</span>
+                        <span class="skill-tag">GCP</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Tableau</span>
+                    </div>
+                </div>
 
-        <a class="contact-card" href="tel:+5541987021076">
-            <div class="contact-icon"><i class="bi bi-telephone"></i></div>
-            <div class="contact-body">
-                <div class="contact-platform pt-only">Telefone</div>
-                <div class="contact-platform en-only">Phone</div>
-                <div class="contact-name pt-only">Ligar Agora</div>
-                <div class="contact-name en-only">Call Now</div>
-                <div class="contact-handle">+55 (41) 98702-1076</div>
-            </div>
-            <i class="bi bi-arrow-right contact-arrow"></i>
-        </a>
-    </div>
+                <div class="skills-group">
+                    <div class="skills-group-label pt-only">Ferramentas</div>
+                    <div class="skills-group-label en-only">Tools</div>
+                    <div class="skills-cloud">
+                        <span class="skill-tag hi">Git</span>
+                        <span class="skill-tag hi">UiPath</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Unity</span>
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">Matlab</span>
+                    </div>
+                </div>
 
-    <div class="divider"></div>
+                <div class="skills-group">
+                    <div class="skills-group-label pt-only">Especialidades</div>
+                    <div class="skills-group-label en-only">Specialties</div>
+                    <div class="skills-cloud">
+                        <span class="skill-tag hi pt-only">Inteligência Artificial</span>
+                        <span class="skill-tag hi en-only">Artificial Intelligence</span>
+                        <span class="skill-tag hi pt-only">Engenharia de Dados</span>
+                        <span class="skill-tag hi en-only">Data Engineering</span>
+                        <span class="skill-tag">OCR</span>
+                        <span class="skill-tag">ML</span>
+                        <span class="skill-tag pt-only">Visão Computacional</span>
+                        <span class="skill-tag en-only">Computer Vision</span>
+                        <span class="skill-tag pt-only">Realidade Aumentada</span>
+                        <span class="skill-tag en-only">Augmented Reality</span>
+                        <span class="skill-tag pt-only">Sistemas Embarcados</span>
+                        <span class="skill-tag en-only">Embedded Systems</span>
+                        <span class="skill-tag pt-only">Processamento de Imagens</span>
+                        <span class="skill-tag en-only">Image Processing</span>
+                        <span class="skill-tag pt-only">Metodologias Ágeis</span>
+                        <span class="skill-tag en-only">Agile</span>
+                    </div>
+                </div>
 
-    <!-- AVAILABILITY -->
-    <div class="availability-banner">
-        <div class="avail-left">
-            <div class="avail-dot"></div>
-            <div class="avail-text">
-                <div class="avail-title pt-only">Disponível para novas oportunidades</div>
-                <div class="avail-title en-only">Available for new opportunities</div>
-                <div class="avail-sub pt-only">Curitiba, PR, Brazil · Full Stack · IA · Sistemas Embarcados</div>
-                <div class="avail-sub en-only">Curitiba, PR, Brazil · Full Stack · AI · Embedded Systems</div>
+                <!-- Academic Projects mini-card -->
+                <div class="sidebar-card" style="margin-top:8px;">
+                    <div class="sidebar-card-title"><i class="bi bi-book"></i> <span class="pt-only">Projetos Acadêmicos</span><span class="en-only">Academic Projects</span></div>
+                    <div class="sidebar-item">
+                        <div class="sidebar-item-icon"><i class="bi bi-heart-pulse"></i></div>
+                        <div>
+                            <div class="sidebar-item-label">2025–2027</div>
+                            <div class="sidebar-item-value">HIIA</div>
+                            <div class="sidebar-item-sub pt-only">Detecção de fadiga em idosos · IA Multimodal</div>
+                            <div class="sidebar-item-sub en-only">Elderly fatigue detection · Multimodal AI</div>
+                        </div>
+                    </div>
+                    <div class="sidebar-item">
+                        <div class="sidebar-item-icon"><i class="bi bi-activity"></i></div>
+                        <div>
+                            <div class="sidebar-item-label">2024</div>
+                            <div class="sidebar-item-value">Fit IA Muscle</div>
+                            <div class="sidebar-item-sub pt-only">IA para análise de exercícios</div>
+                            <div class="sidebar-item-sub en-only">AI for exercise analysis</div>
+                        </div>
+                    </div>
+                    <div class="sidebar-item" style="margin-bottom:0;">
+                        <div class="sidebar-item-icon"><i class="bi bi-box"></i></div>
+                        <div>
+                            <div class="sidebar-item-label">2021–2022</div>
+                            <div class="sidebar-item-value pt-only">Reconstrução 3D — CNPq</div>
+                            <div class="sidebar-item-value en-only">3D Reconstruction — CNPq</div>
+                            <div class="sidebar-item-sub">ToF · Unity · Python</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <a href="mailto:leandrorg307@gmail.com" class="btn-primary pt-only">Enviar Email</a>
-        <a href="mailto:leandrorg307@gmail.com" class="btn-primary en-only">Send Email</a>
     </div>
-</main>
+</section>
 
-<footer>
-    <span class="pt-only">© 2025 Leandro Guimarães · Todos os direitos reservados</span>
-    <span class="en-only">© 2025 Leandro Guimarães · All rights reserved</span>
-    <a href="index.html" class="pt-only">← Voltar ao Portfólio</a>
-    <a href="index.html" class="en-only">← Back to Portfolio</a>
-</footer>
+<footer></footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     function setLang(lang) {
         document.documentElement.setAttribute('data-lang', lang);
         document.documentElement.setAttribute('lang', lang);
         document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
         try { localStorage.setItem('portfolio_lang', lang); } catch(e) {}
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-        let saved = 'pt-BR';
-        try { saved = localStorage.getItem('portfolio_lang') || 'pt-BR'; } catch(e) {}
-        setLang(saved);
-    });
+    }-e 
 </script>
+<script src="nav.js"></script>
 </body>
 </html>
